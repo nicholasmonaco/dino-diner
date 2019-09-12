@@ -53,7 +53,7 @@ namespace MenuTest.Entrees
         public void HoldCheeseShouldRemoveCheese()
         {
             VelociWrap vw = new VelociWrap();
-            vw.holdCheese();
+            vw.HoldCheese();
             Assert.DoesNotContain<string>("Parmesan Cheese", vw.Ingredients);
         }
     }
