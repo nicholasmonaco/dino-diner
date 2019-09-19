@@ -10,19 +10,16 @@ namespace DinoDiner.Menu.Entrees {
     /// <summary>
     /// Defines the Steakosaurus Burger entree.
     /// </summary>
-    public class SteakosaurusBurger {
+    public class SteakosaurusBurger : Entree {
         private bool bun = true;
         private bool pickle = true;
         private bool ketchup = true;
         private bool mustard = true;
 
-        public double Price { get; set; }
-        public uint Calories { get; set; }
-
         /// <summary>
         /// Defines the ingredients that exist in the entree.
         /// </summary>
-        public List<string> Ingredients {
+        public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>() { "Steakburger Pattie" };
                 if (bun) ingredients.Add("Whole Wheat Bun");

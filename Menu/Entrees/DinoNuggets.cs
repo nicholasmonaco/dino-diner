@@ -10,18 +10,15 @@ namespace DinoDiner.Menu.Entrees {
     /// <summary>
     /// Defines the Dino Nuggets entree.
     /// </summary>
-    public class DinoNuggets {
+    public class DinoNuggets : Entree {
 
         private int nugCount = 6;
-
-        public double Price { get; set; }
-        public uint Calories { get; set; }
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
         /// Each Dino Nugget is considered a seperate ingredient.
         /// </summary>
-        public List<string> Ingredients {
+        public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>();
                 for(int i = 0; i < nugCount; i++) {
