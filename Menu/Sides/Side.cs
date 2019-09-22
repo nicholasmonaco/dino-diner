@@ -1,6 +1,6 @@
 ﻿/*  Side.cs
 *   Author: Nathan Bean
-*   Edited by Nick Monaco
+*   Modified by: Nick Monaco
 */
 
 using System;
