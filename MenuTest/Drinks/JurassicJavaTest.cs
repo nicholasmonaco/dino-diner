@@ -94,6 +94,14 @@ namespace MenuTest.Drinks {
             Assert.True(jj.RoomForCream);
         }
 
+        [Fact]
+        public void ShouldHaveCorrectIngredients() {
+            JurassicJava jj = new JurassicJava();
+            Assert.Contains<string>("Water", jj.Ingredients);
+            Assert.Contains<string>("Coffee", jj.Ingredients);
+            Assert.Equal<int>(2, jj.Ingredients.Count);
+        }
+
 
     }
 }

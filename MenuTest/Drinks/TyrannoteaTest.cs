@@ -98,6 +98,15 @@ namespace MenuTest.Drinks {
             tt.Lemon = false;
             tt.AddLemon();
             Assert.True(tt.Lemon);
+            Assert.Contains<string>("Lemon", tt.Ingredients);
+        }
+
+        [Fact]
+        public void ShouldMakeSweet() {
+            Tyrannotea tt = new Tyrannotea();
+            tt.Sweet = true;
+            Assert.True(tt.Sweet);
+            Assert.Contains<string>("Cane Sugar", tt.Ingredients);
         }
 
         [Fact]
@@ -169,6 +178,14 @@ namespace MenuTest.Drinks {
 
             tt.Sweet = false;
             Assert.Equal<uint>(32u, tt.Calories);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectIngredients() {
+            Tyrannotea tt = new Tyrannotea();
+            Assert.Contains<string>("Water", tt.Ingredients);
+            Assert.Contains<string>("Tea", tt.Ingredients);
+            Assert.Equal<int>(2, tt.Ingredients.Count);
         }
 
     }

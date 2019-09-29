@@ -92,6 +92,14 @@ namespace MenuTest.Drinks {
             w.Lemon = false;
             w.AddLemon();
             Assert.True(w.Lemon);
+            Assert.Contains<string>("Lemon", w.Ingredients);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectIngredients() {
+            Water w = new Water();
+            Assert.Contains<string>("Water", w.Ingredients);
+            Assert.Single(w.Ingredients);
         }
 
     }

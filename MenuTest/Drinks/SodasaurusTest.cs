@@ -78,27 +78,46 @@ namespace MenuTest.Drinks {
         }
 
         [Fact]
-        public void ShouldHaveCorrectSmallSizeData() {
+        public void ShouldHaveCorrectSmallSizePrice() {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Large;
             ss.Size = Size.Small;
             Assert.Equal<double>(1.50, ss.Price);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectSmallSizeCalories() {
+            Sodasaurus ss = new Sodasaurus();
+            ss.Size = Size.Large;
+            ss.Size = Size.Small;
             Assert.Equal<uint>(112u, ss.Calories);
         }
 
         [Fact]
-        public void ShouldHaveCorrectMediumSizeData() {
+        public void ShouldHaveCorrectMediumSizePrice() {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Medium;
             Assert.Equal<double>(2.00, ss.Price);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectMediumSizeCalories() {
+            Sodasaurus ss = new Sodasaurus();
+            ss.Size = Size.Medium;
             Assert.Equal<uint>(156u, ss.Calories);
         }
 
         [Fact]
-        public void ShouldHaveCorrectLargeSizeData() {
+        public void ShouldHaveCorrectLargeSizePrice() {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Large;
             Assert.Equal<double>(2.50, ss.Price);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectLargeSizeCalories() {
+            Sodasaurus ss = new Sodasaurus();
+            ss.Size = Size.Large;
             Assert.Equal<uint>(208u, ss.Calories);
         }
 
@@ -108,6 +127,15 @@ namespace MenuTest.Drinks {
             ss.Ice = true;
             ss.HoldIce();
             Assert.False(ss.Ice);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectIngredients() {
+            Sodasaurus ss = new Sodasaurus();
+            Assert.Contains<string>("Water", ss.Ingredients);
+            Assert.Contains<string>("Natural Flavors", ss.Ingredients);
+            Assert.Contains<string>("Cane Sugar", ss.Ingredients);
+            Assert.Equal<int>(3, ss.Ingredients.Count);
         }
 
     }
