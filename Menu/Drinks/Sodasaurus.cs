@@ -2,11 +2,9 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Drinks {
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// An enum for the possible flavors of a Sodasaurus.
@@ -20,7 +18,7 @@ namespace DinoDiner.Menu.Drinks {
     /// <summary>
     /// Defines the Sodasaurus drink, which extends the abstract Drink class.
     /// </summary>
-    public class Sodasaurus : Drink {
+    public class Sodasaurus : Drink, IMenuItem {
 
         /// <summary>
         /// Holds the current Size of the drink.
@@ -76,6 +74,13 @@ namespace DinoDiner.Menu.Drinks {
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Returns the name and details of the drink.
+        /// </summary>
+        /// <returns>The name and details of the drink as a string.</returns>
+        public override string ToString() {
+            return $"{this.Size} {this.Flavor} Sodasaurus";
+        }
     }
 }

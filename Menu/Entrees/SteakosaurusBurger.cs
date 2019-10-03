@@ -2,19 +2,34 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Steakosaurus Burger entree.
     /// </summary>
-    public class SteakosaurusBurger : Entree {
+    public class SteakosaurusBurger : Entree, IMenuItem {
+
+        /// <summary>
+        /// Indicates if the entree has a bun.
+        /// </summary>
         private bool bun = true;
+
+        /// <summary>
+        /// Indicates if the entree has pickles.
+        /// </summary>
         private bool pickle = true;
+
+        /// <summary>
+        /// Indicates if the entree has ketchup.
+        /// </summary>
         private bool ketchup = true;
+
+        /// <summary>
+        /// Indicates if the entree has mustard.
+        /// </summary>
         private bool mustard = true;
+
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -64,6 +79,14 @@ namespace DinoDiner.Menu.Entrees {
         /// </summary>
         public void HoldMustard() {
             this.mustard = false;
+        }
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Steakosaurus Burger";
         }
     }
 }

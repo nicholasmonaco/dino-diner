@@ -2,19 +2,29 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Veloci-Wrap entree.
     /// </summary>
-    public class VelociWrap : Entree{
+    public class VelociWrap : Entree, IMenuItem {
 
+        /// <summary>
+        /// Indicates if the entree has dressing.
+        /// </summary>
         private bool dressing = true;
+
+        /// <summary>
+        /// Indicates if the entree has lettuce.
+        /// </summary>
         private bool lettuce = true;
+
+        /// <summary>
+        /// Indicates if the entree has cheese.
+        /// </summary>
         private bool cheese = true;
+
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -56,6 +66,14 @@ namespace DinoDiner.Menu.Entrees {
         /// </summary>
         public void HoldCheese() {
             this.cheese = false;
+        }
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Veloci-Wrap";
         }
     }
 }

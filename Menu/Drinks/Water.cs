@@ -2,16 +2,14 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Drinks {
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Water drink, which extends the abstract Drink class.
     /// </summary>
-    public class Water : Drink {
+    public class Water : Drink, IMenuItem {
 
         /// <summary>
         /// Gets and sets if the drink has a lemon slice in it.
@@ -51,5 +49,13 @@ namespace DinoDiner.Menu.Drinks {
         /// Gets and sets the size of the drink.
         /// </summary>
         public override Size Size { get; set; }
+
+        /// <summary>
+        /// Returns the size and name of the drink.
+        /// </summary>
+        /// <returns>The size and name of the drink as a string.</returns>
+        public override string ToString() {
+            return $"{this.Size} Water";
+        }
     }
 }

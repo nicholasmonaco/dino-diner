@@ -3,25 +3,14 @@
 *   Modified by: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Sides {
-
-    /// <summary>
-    /// An enum for the size of the side.
-    /// </summary>
-    public enum Size {
-        Small,
-        Medium, 
-        Large
-    }
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the abstract side object.
     /// </summary>
-    public abstract class Side {
+    public abstract class Side : IMenuItem {
         /// <summary>
         /// Gets and sets the price.
         /// </summary>

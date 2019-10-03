@@ -3,7 +3,7 @@
 */
 
 using Xunit;
-using DinoDiner.Menu.Drinks;
+using DinoDiner.Menu;
 
 namespace MenuTest.Drinks {
 

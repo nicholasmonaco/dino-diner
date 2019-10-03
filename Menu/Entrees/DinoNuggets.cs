@@ -2,16 +2,17 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Dino Nuggets entree.
     /// </summary>
-    public class DinoNuggets : Entree {
+    public class DinoNuggets : Entree, IMenuItem {
 
+        /// <summary>
+        /// Indicates how many nuggets are in the entree.
+        /// </summary>
         private int nugCount = 6;
 
         /// <summary>
@@ -45,6 +46,14 @@ namespace DinoDiner.Menu.Entrees {
             this.Price += 0.25;
             this.Calories += 59;
             Ingredients.Add("Chicken Nugget");
+        }
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Dino-Nuggets";
         }
     }
 }

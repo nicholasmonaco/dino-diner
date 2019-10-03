@@ -6,15 +6,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Brontowurst entree.
     /// </summary>
-    public class Brontowurst : Entree {
+    public class Brontowurst : Entree, IMenuItem {
 
+        /// <summary>
+        /// Indicates if the entree has a bun.
+        /// </summary>
         private bool bun = true;
+
+        /// <summary>
+        /// Indicates if the entree has peppers.
+        /// </summary>
         private bool peppers = true;
+
+        /// <summary>
+        /// Indicates if the entree has onion.
+        /// </summary>
         private bool onion = true;
+
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -35,6 +47,7 @@ namespace DinoDiner.Menu.Entrees {
         public Brontowurst() {
             this.Price = 5.36;
             this.Calories = 498;
+            
         }
 
         /// <summary>
@@ -58,5 +71,12 @@ namespace DinoDiner.Menu.Entrees {
             this.onion = false;
         }
 
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Brontowurst";
+        }
     }
 }

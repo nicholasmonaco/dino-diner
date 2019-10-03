@@ -5,15 +5,23 @@
 
 using System.Collections.Generic;
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// Defines the Prehistoric PB&J entree.
     /// </summary>
-    public class PrehistoricPBJ : Entree {
+    public class PrehistoricPBJ : Entree, IMenuItem {
 
+        /// <summary>
+        /// Indicates if the entree has peanut butter.
+        /// </summary>
         private bool peanutButter = true;
+
+        /// <summary>
+        /// Indicates if the entree has jelly.
+        /// </summary>
         private bool jelly = true;
+
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -47,6 +55,14 @@ namespace DinoDiner.Menu.Entrees
         /// </summary>
         public void HoldJelly(){
             this.jelly = false;
+        }
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Prehistoric PB&J";
         }
     }
 }

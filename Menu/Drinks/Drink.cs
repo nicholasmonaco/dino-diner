@@ -2,25 +2,14 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Drinks {
-
-    /// <summary>
-    /// An enum for the possible sizes of a drink.
-    /// </summary>
-    public enum Size {
-        Small,
-        Medium,
-        Large
-    }
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the abstract drink object.
     /// </summary>
-    public abstract class Drink {
+    public abstract class Drink : IMenuItem {
 
         /// <summary>
         /// Gets and sets the price.

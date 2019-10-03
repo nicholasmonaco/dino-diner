@@ -2,15 +2,13 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the abstract Entree object.
     /// </summary>
-    public abstract class Entree {
+    public abstract class Entree : IMenuItem {
 
         /// <summary>
         /// Gets and sets the price of the Entree.

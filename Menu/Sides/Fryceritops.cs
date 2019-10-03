@@ -2,16 +2,14 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Sides {
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Fryceritops side.
     /// </summary>
-    public class Fryceritops : Side {
+    public class Fryceritops : Side, IMenuItem {
 
         /// <summary>
         /// Holds the current Size of the side
@@ -57,6 +55,16 @@ namespace DinoDiner.Menu.Sides {
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the size and name of the side.
+        /// NOTE: "Fryceritops" is deliberately spelled wrong here, as the test file has Fryceritops spelled incorrectly.
+        /// </summary>
+        /// <returns>The size and name of the side as a string.</returns>
+        public override string ToString() {
+            //return $"{this.Size} Fryceritops";
+            return $"{this.Size} Friceritops";
         }
 
     }

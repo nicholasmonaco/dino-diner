@@ -2,16 +2,14 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Sides {
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Meteor Mac and Cheese side.
     /// </summary>
-    public class MeteorMacAndCheese : Side {
+    public class MeteorMacAndCheese : Side, IMenuItem {
 
         /// <summary>
         /// Holds the current Size of the side
@@ -57,6 +55,14 @@ namespace DinoDiner.Menu.Sides {
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the size and name of the side.
+        /// </summary>
+        /// <returns>The size and name of the side as a string.</returns>
+        public override string ToString() {
+            return $"{this.Size} Meteor Mac and Cheese";
         }
 
     }

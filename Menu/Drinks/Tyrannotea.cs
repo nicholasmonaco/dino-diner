@@ -2,16 +2,15 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Drinks {
+namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Tyrannotea drink, which extends the abstract Drink class.
     /// </summary>
-    public class Tyrannotea : Drink {
+    public class Tyrannotea : Drink, IMenuItem {
 
         /// <summary>
         /// Holds the current Size of the drink.
@@ -105,6 +104,18 @@ namespace DinoDiner.Menu.Drinks {
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the name and details of the drink.
+        /// </summary>
+        /// <returns>The name and details of the drink as a string.</returns>
+        public override string ToString() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.Size.ToString());
+            if(Sweet) { sb.Append(" Sweet"); }
+            sb.Append(" Tyrannotea");
+            return sb.ToString();
         }
     }
 }

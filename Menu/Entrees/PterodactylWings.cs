@@ -2,15 +2,13 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Pterodactyl Wings entree.
     /// </summary>
-    public class PterodactylWings : Entree {
+    public class PterodactylWings : Entree, IMenuItem {
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -28,6 +26,15 @@ namespace DinoDiner.Menu.Entrees {
         public PterodactylWings() {
             this.Price = 7.21;
             this.Calories = 318;
+        }
+
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "Pterodactyl Wings";
         }
     }
 }

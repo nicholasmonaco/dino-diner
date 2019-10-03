@@ -2,24 +2,54 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DinoDiner.Menu.Entrees {
+namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the T-Rex King Burger entree.
     /// </summary>
-    public class TRexKingBurger : Entree {
+    public class TRexKingBurger : Entree, IMenuItem {
 
+        /// <summary>
+        /// Indicates if the entree has a bun.
+        /// </summary>
         private bool bun = true;
+
+        /// <summary>
+        /// Indicates if the entree has lettuce.
+        /// </summary>
         private bool lettuce = true;
+
+        /// <summary>
+        /// Indicates if the entree has tomato.
+        /// </summary>
         private bool tomato = true;
+
+        /// <summary>
+        /// Indicates if the entree has onion.
+        /// </summary>
         private bool onion = true;
+
+        /// <summary>
+        /// Indicates if the entree has pickles.
+        /// </summary>
         private bool pickle = true;
+
+        /// <summary>
+        /// Indicates if the entree has ketchup.
+        /// </summary>
         private bool ketchup = true;
+
+        /// <summary>
+        /// Indicates if the entree has mustard.
+        /// </summary>
         private bool mustard = true;
+
+        /// <summary>
+        /// Indicates if the entree has mayo.
+        /// </summary>
         private bool mayo = true;
+
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -101,6 +131,14 @@ namespace DinoDiner.Menu.Entrees {
         /// </summary>
         public void HoldMayo() {
             this.mayo = false;
+        }
+
+        /// <summary>
+        /// Returns the name of the entree.
+        /// </summary>
+        /// <returns>The name of the entree as a string.</returns>
+        public override string ToString() {
+            return "T-Rex King Burger";
         }
     }
 }
