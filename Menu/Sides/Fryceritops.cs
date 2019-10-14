@@ -59,12 +59,10 @@ namespace DinoDiner.Menu {
 
         /// <summary>
         /// Returns the size and name of the side.
-        /// NOTE: "Fryceritops" is deliberately spelled wrong here, as the test file has Fryceritops spelled incorrectly.
         /// </summary>
         /// <returns>The size and name of the side as a string.</returns>
         public override string ToString() {
-            //return $"{this.Size} Fryceritops";
-            return $"{this.Size} Friceritops";
+            return $"{this.Size} Fryceritops";
         }
 
     }
