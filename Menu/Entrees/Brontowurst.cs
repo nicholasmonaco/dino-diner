@@ -2,15 +2,14 @@
 *   Author: Nick Monaco
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Brontowurst entree.
     /// </summary>
-    public class Brontowurst : Entree, IMenuItem {
+    public class Brontowurst : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates if the entree has a bun.
@@ -47,7 +46,6 @@ namespace DinoDiner.Menu {
         public Brontowurst() {
             this.Price = 5.36;
             this.Calories = 498;
-            
         }
 
         /// <summary>
@@ -55,6 +53,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldBun() {
             this.bun = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -62,6 +61,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldPeppers() {
             this.peppers = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -69,6 +69,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldOnion() {
             this.onion = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -77,6 +78,27 @@ namespace DinoDiner.Menu {
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "Brontowurst";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(3);
+                if (!this.bun) { details.Add("Hold Bun"); }
+                if (!this.peppers) { details.Add("Hold Peppers"); }
+                if (!this.onion) { details.Add("Hold Onion"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

@@ -3,12 +3,13 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Steakosaurus Burger entree.
     /// </summary>
-    public class SteakosaurusBurger : Entree, IMenuItem {
+    public class SteakosaurusBurger : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates if the entree has a bun.
@@ -58,6 +59,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldBun() {
             this.bun = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -65,6 +67,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldPickle() {
             this.pickle = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldKetchup() {
             this.ketchup = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -79,6 +83,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldMustard() {
             this.mustard = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -87,6 +92,28 @@ namespace DinoDiner.Menu {
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "Steakosaurus Burger";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(4);
+                if (!this.bun) { details.Add("Hold Bun"); }
+                if (!this.pickle) { details.Add("Hold Pickle"); }
+                if (!this.ketchup) { details.Add("Hold Ketchup"); }
+                if (!this.mustard) { details.Add("Hold Mustard"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

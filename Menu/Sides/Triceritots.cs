@@ -3,13 +3,14 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Triceritots side.
     /// </summary>
-    public class Triceritots : Side, IMenuItem {
+    public class Triceritots : Side, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Holds the current Size of the side
@@ -54,6 +55,10 @@ namespace DinoDiner.Menu {
                         Calories = 590;
                         break;
                 }
+                NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Description");
             }
         }
 
@@ -63,6 +68,20 @@ namespace DinoDiner.Menu {
         /// <returns>The size and name of the side as a string.</returns>
         public override string ToString() {
             return $"{this.Size} Triceritots";
+        }
+
+        /// <summary>
+        /// Gets the description of the side.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get { return new string[0]; }
         }
     }
 }

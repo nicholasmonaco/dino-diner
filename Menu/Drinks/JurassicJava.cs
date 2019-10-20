@@ -4,13 +4,14 @@
 
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the JurassicJava drink, which extends the abstract Drink class.
     /// </summary>
-    public class JurassicJava : Drink, IMenuItem {
+    public class JurassicJava : Drink, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Holds the current Size of the drink.
@@ -18,14 +19,39 @@ namespace DinoDiner.Menu {
         private Size _size;
 
         /// <summary>
+        /// Holds if there should be room for cream in the drink.
+        /// </summary>
+        private bool _roomForCream;
+
+        /// <summary>
+        /// Holds if the Jurassic Java should be decaf.
+        /// </summary>
+        private bool _decaf;
+
+
+        /// <summary>
         /// Gets and sets if the JurassicJava should leave room for cream.
         /// </summary>
-        public bool RoomForCream { get; set; }
+        public bool RoomForCream {
+            get { return _roomForCream; }
+            set {
+                _roomForCream = value;
+                NotifyOfPropertyChanged("RoomForCream");
+                NotifyOfPropertyChanged("Special");
+            }
+        }
 
         /// <summary>
         /// Gets and sets if the JurassicJava should be decaf or not.
         /// </summary>
-        public bool Decaf { get; set; }
+        public bool Decaf {
+            get { return _decaf; }
+            set {
+                _decaf = value;
+                NotifyOfPropertyChanged("Decaf");
+                NotifyOfPropertyChanged("Description");
+            }
+        }
 
 
         /// <summary>
@@ -85,6 +111,10 @@ namespace DinoDiner.Menu {
                         Calories = 8;
                         break;
                 }
+                NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Description");
             }
         }
 
@@ -98,6 +128,26 @@ namespace DinoDiner.Menu {
             if (Decaf) { sb.Append(" Decaf"); }
             sb.Append(" Jurassic Java");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Gets the description of the drink.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during drink preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(3);
+                if (this.Ice) { details.Add("Add Ice"); }
+                if (this.RoomForCream) { details.Add("Leave Room For Cream"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

@@ -3,13 +3,14 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Mezzorella Sticks side.
     /// </summary>
-    public class MezzorellaSticks : Side, IMenuItem {
+    public class MezzorellaSticks : Side, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Holds the current Size of the side
@@ -54,6 +55,10 @@ namespace DinoDiner.Menu {
                         Calories = 720;
                         break;
                 }
+                NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Description");
             }
         }
 
@@ -65,5 +70,18 @@ namespace DinoDiner.Menu {
             return $"{this.Size} Mezzorella Sticks";
         }
 
+        /// <summary>
+        /// Gets the description of the side.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get { return new string[0]; }
+        }
     }
 }

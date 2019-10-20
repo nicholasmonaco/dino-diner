@@ -103,7 +103,7 @@ namespace MenuTest
         [InlineData(Size.Small)]
         [InlineData(Size.Medium)]
         [InlineData(Size.Large)]
-        public void ToStringShouldGiveNameForSize(Size size)
+        public void TriceritotsToStringShouldGiveNameForSize(Size size)
         {
             Triceritots tt = new Triceritots();
             tt.Size = size;
@@ -200,7 +200,7 @@ namespace MenuTest
         [InlineData(typeof(SteakosaurusBurger), "Steakosaurus Burger Combo")]
         [InlineData(typeof(TRexKingBurger), "T-Rex King Burger Combo")]
         [InlineData(typeof(VelociWrap), "Veloci-Wrap Combo")]
-        public void ToStringShouldGiveName(Type type, string name)
+        public void ComboToStringShouldGiveName(Type type, string name)
         {
             Entree entree = (Entree)Activator.CreateInstance(type);
             CretaceousCombo combo = new CretaceousCombo(entree);

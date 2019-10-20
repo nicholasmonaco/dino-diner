@@ -3,6 +3,7 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
@@ -18,7 +19,7 @@ namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Sodasaurus drink, which extends the abstract Drink class.
     /// </summary>
-    public class Sodasaurus : Drink, IMenuItem {
+    public class Sodasaurus : Drink, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Holds the current Size of the drink.
@@ -28,7 +29,20 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Holds the current flavor of the Sodasaurus.
         /// </summary>
-        public SodasaurusFlavor Flavor { get; set; }
+        private SodasaurusFlavor _flavor;
+
+
+        /// <summary>
+        /// Gets and sets the current flavor of the Sodasaurus.
+        /// </summary>
+        public SodasaurusFlavor Flavor {
+            get { return _flavor; }
+            set {
+                _flavor = value;
+                NotifyOfPropertyChanged("Description");
+                NotifyOfPropertyChanged("Flavor");
+            }
+        }
 
 
         /// <summary>
@@ -72,6 +86,10 @@ namespace DinoDiner.Menu {
                         Calories = 208;
                         break;
                 }
+                NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Description");
             }
         }
 
@@ -81,6 +99,25 @@ namespace DinoDiner.Menu {
         /// <returns>The name and details of the drink as a string.</returns>
         public override string ToString() {
             return $"{this.Size} {this.Flavor} Sodasaurus";
+        }
+
+        /// <summary>
+        /// Gets the description of the drink.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during drink preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(1);
+                if (!this.Ice) { details.Add("Hold Ice"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

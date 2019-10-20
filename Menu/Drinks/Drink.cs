@@ -3,13 +3,19 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the abstract drink object.
     /// </summary>
-    public abstract class Drink : IMenuItem {
+    public abstract class Drink : IMenuItem, IOrderItem, INotifyPropertyChanged {
+
+        /// <summary>
+        /// Holds the value determining if the drink contains ice or not.
+        /// </summary>
+        private bool _ice;
 
         /// <summary>
         /// Gets and sets the price.
@@ -34,7 +40,14 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Gets and sets if the drink contains ice.
         /// </summary>
-        public bool Ice { get; set; }
+        public bool Ice {
+            get { return _ice; }
+            set {
+                _ice = value;
+                NotifyOfPropertyChanged("Ice");
+                NotifyOfPropertyChanged("Special");
+            }
+        }
 
 
         /// <summary>
@@ -54,5 +67,27 @@ namespace DinoDiner.Menu {
             Ice = false;
         }
 
+        /// <summary>
+        /// The description of the drink.
+        /// </summary>
+        public abstract string Description { get; }
+
+        /// <summary>
+        /// A list of special instructions for drink preperation.
+        /// </summary>
+        public abstract string[] Special { get; }
+
+        /// <summary>
+        /// The event handler that handles if any properties of the drink were changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// An accessor method for invoking a property change.
+        /// </summary>
+        /// <param name="name">The name of the property being changed.</param>
+        protected void NotifyOfPropertyChanged(string name = "") {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

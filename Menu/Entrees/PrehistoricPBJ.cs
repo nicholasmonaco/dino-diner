@@ -4,13 +4,14 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu
 {
     /// <summary>
     /// Defines the Prehistoric PB&J entree.
     /// </summary>
-    public class PrehistoricPBJ : Entree, IMenuItem {
+    public class PrehistoricPBJ : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates if the entree has peanut butter.
@@ -48,6 +49,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public void HoldPeanutButter(){
             this.peanutButter = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -55,6 +57,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public void HoldJelly(){
             this.jelly = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -63,6 +66,26 @@ namespace DinoDiner.Menu
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "Prehistoric PB&J";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(2);
+                if (!this.peanutButter) { details.Add("Hold Peanut Butter"); }
+                if (!this.jelly) { details.Add("Hold Jelly"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

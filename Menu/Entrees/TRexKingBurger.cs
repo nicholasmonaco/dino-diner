@@ -3,12 +3,13 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the T-Rex King Burger entree.
     /// </summary>
-    public class TRexKingBurger : Entree, IMenuItem {
+    public class TRexKingBurger : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates if the entree has a bun.
@@ -82,6 +83,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldBun() {
             this.bun = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -89,6 +91,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldLettuce() {
             this.lettuce = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -96,6 +99,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldTomato() {
             this.tomato = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -103,6 +107,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldOnion() {
             this.onion = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -110,6 +115,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldPickle() {
             this.pickle = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -117,6 +123,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldKetchup() {
             this.ketchup = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -124,6 +131,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldMustard() {
             this.mustard = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -131,6 +139,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldMayo() {
             this.mayo = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -139,6 +148,32 @@ namespace DinoDiner.Menu {
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "T-Rex King Burger";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(8);
+                if (!this.bun) { details.Add("Hold Bun"); }
+                if (!this.lettuce) { details.Add("Hold Lettuce"); }
+                if (!this.tomato) { details.Add("Hold Tomato"); }
+                if (!this.onion) { details.Add("Hold Onion"); }
+                if (!this.pickle) { details.Add("Hold Pickle"); }
+                if (!this.ketchup) { details.Add("Hold Ketchup"); }
+                if (!this.mustard) { details.Add("Hold Mustard"); }
+                if (!this.mayo) { details.Add("Hold Mayo"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

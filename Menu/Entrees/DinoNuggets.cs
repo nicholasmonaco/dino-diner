@@ -3,12 +3,13 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Dino Nuggets entree.
     /// </summary>
-    public class DinoNuggets : Entree, IMenuItem {
+    public class DinoNuggets : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates how many nuggets are in the entree.
@@ -46,6 +47,10 @@ namespace DinoDiner.Menu {
             this.Price += 0.25;
             this.Calories += 59;
             Ingredients.Add("Chicken Nugget");
+
+            NotifyOfPropertyChanged("Price");
+            NotifyOfPropertyChanged("Calories");
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -54,6 +59,30 @@ namespace DinoDiner.Menu {
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "Dino-Nuggets";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(1);
+
+                if (this.nugCount == 7) {
+                    details.Add("Add 1 Extra Nugget");
+                }else if(this.nugCount > 7) {
+                    details.Add($"Add {nugCount - 6} Extra Nuggets");
+                }
+
+                return details.ToArray();
+            }
         }
     }
 }

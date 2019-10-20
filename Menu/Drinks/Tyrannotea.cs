@@ -4,18 +4,24 @@
 
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines the Tyrannotea drink, which extends the abstract Drink class.
     /// </summary>
-    public class Tyrannotea : Drink, IMenuItem {
+    public class Tyrannotea : Drink, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Holds the current Size of the drink.
         /// </summary>
         private Size _size;
+
+        /// <summary>
+        /// Holds the value of whether the drink has lemon or not.
+        /// </summary>
+        private bool _lemon;
 
         /// <summary>
         /// Holds if the Tyrannotea is sweet or not.
@@ -38,13 +44,23 @@ namespace DinoDiner.Menu {
                     if (value) { this.Calories *= 2; } 
                     else { this.Calories /= 2; }
                 }
+                NotifyOfPropertyChanged("Description");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Sweet");
             }
         }
 
         /// <summary>
         /// Gets and sets if the drink has a lemon slice in it.
         /// </summary>
-        public bool Lemon { get; set; }
+        public bool Lemon {
+            get { return _lemon; }
+            set {
+                _lemon = value;
+                NotifyOfPropertyChanged("Lemon");
+                NotifyOfPropertyChanged("Special");
+            }
+        }
 
 
         /// <summary>
@@ -103,6 +119,10 @@ namespace DinoDiner.Menu {
                         else { Calories = 64; }
                         break;
                 }
+                NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Description");
             }
         }
 
@@ -116,6 +136,26 @@ namespace DinoDiner.Menu {
             if(Sweet) { sb.Append(" Sweet"); }
             sb.Append(" Tyrannotea");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Gets the description of the drink.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during drink preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(3);
+                if (!this.Ice) { details.Add("Hold Ice"); }
+                if (this.Lemon) { details.Add("Add Lemon"); }
+
+                return details.ToArray();
+            }
         }
     }
 }

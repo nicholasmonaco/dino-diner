@@ -3,12 +3,13 @@
 */
 
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
     /// <summary>
     /// Defines the Veloci-Wrap entree.
     /// </summary>
-    public class VelociWrap : Entree, IMenuItem {
+    public class VelociWrap : Entree, IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
         /// Indicates if the entree has dressing.
@@ -52,6 +53,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldDressing() {
             this.dressing = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldLettuce() {
             this.lettuce = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -66,6 +69,7 @@ namespace DinoDiner.Menu {
         /// </summary>
         public void HoldCheese() {
             this.cheese = false;
+            NotifyOfPropertyChanged("Special");
         }
 
         /// <summary>
@@ -74,6 +78,26 @@ namespace DinoDiner.Menu {
         /// <returns>The name of the entree as a string.</returns>
         public override string ToString() {
             return "Veloci-Wrap";
+        }
+
+        /// <summary>
+        /// Gets the description of the Entree.
+        /// </summary>
+        public override string Description {
+            get { return this.ToString(); }
+        }
+
+        /// <summary>
+        /// A list of special instructions to be used during food preparation.
+        /// </summary>
+        public override string[] Special {
+            get {
+                List<string> details = new List<string>(3);
+                if (!this.dressing) { details.Add("Hold Dressing"); }
+                if (!this.lettuce) { details.Add("Hold Lettuce"); }
+                if (!this.cheese) { details.Add("Hold Cheese"); }
+                return details.ToArray();
+            }
         }
     }
 }
