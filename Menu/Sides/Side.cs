@@ -12,15 +12,38 @@ namespace DinoDiner.Menu {
     /// Defines the abstract side object.
     /// </summary>
     public abstract class Side : IMenuItem, IOrderItem, INotifyPropertyChanged {
+
+        /// <summary>
+        /// Holds the price of the side.
+        /// </summary>
+        private double _price;
+
+        /// <summary>
+        /// Holds the calories of the side.
+        /// </summary>
+        private uint _calories;
+
         /// <summary>
         /// Gets and sets the price.
         /// </summary>
-        public double Price { get; set; }
+        public double Price {
+            get { return _price; }
+            set {
+                _price = value;
+                NotifyOfPropertyChanged("Price");
+            }
+        }
 
         /// <summary>
         /// Gets and sets the calories.
         /// </summary>
-        public uint Calories { get; set; }
+        public uint Calories {
+            get { return _calories; }
+            set {
+                _calories = value;
+                NotifyOfPropertyChanged("Calories");
+            }
+        }
 
         /// <summary>
         /// Gets the ingredients list.

@@ -160,7 +160,7 @@ namespace MenuTest {
             Assert.PropertyChanged(tt, "Description", () => tt.Size = Size.Large);
 
             Assert.PropertyChanged(tt, "Description", () => tt.Sweet = true);
-            Assert.PropertyChanged(tt, "Calories", () => tt.Sweet = true);
+            Assert.PropertyChanged(tt, "Calories", () => tt.Sweet = false);
             Assert.PropertyChanged(tt, "Sweet", () => tt.Sweet = true);
 
             Assert.PropertyChanged(tt, "Lemon", () => tt.Lemon = true);

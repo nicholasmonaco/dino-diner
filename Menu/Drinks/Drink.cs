@@ -13,6 +13,16 @@ namespace DinoDiner.Menu {
     public abstract class Drink : IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
+        /// Holds the price of the drink.
+        /// </summary>
+        private double _price;
+
+        /// <summary>
+        /// Holds the calories of the drink.
+        /// </summary>
+        private uint _calories;
+
+        /// <summary>
         /// Holds the value determining if the drink contains ice or not.
         /// </summary>
         private bool _ice;
@@ -20,12 +30,24 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Gets and sets the price.
         /// </summary>
-        public double Price { get; set; }
+        public double Price {
+            get { return _price; }
+            set {
+                _price = value;
+                NotifyOfPropertyChanged("Price");
+            }
+        }
 
         /// <summary>
         /// Gets and sets the calories.
         /// </summary>
-        public uint Calories { get; set; }
+        public uint Calories {
+            get { return _calories; }
+            set {
+                _calories = value;
+                NotifyOfPropertyChanged("Calories");
+            }
+        }
 
         /// <summary>
         /// Gets the ingredients list.

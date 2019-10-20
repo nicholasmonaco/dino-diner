@@ -12,14 +12,36 @@ namespace DinoDiner.Menu {
     public abstract class Entree : IMenuItem, IOrderItem, INotifyPropertyChanged {
 
         /// <summary>
-        /// Gets and sets the price of the Entree.
+        /// Holds the price of the entree.
         /// </summary>
-        public double Price { get; set; }
+        private double _price;
 
         /// <summary>
-        /// Gets and sets the calories of the Entree.
+        /// Holds the calories of the entree.
         /// </summary>
-        public uint Calories { get; set; }
+        private uint _calories;
+
+        /// <summary>
+        /// Gets and sets the price of the Entree.
+        /// </summary>
+        public double Price {
+            get { return _price; }
+            set {
+                _price = value;
+                NotifyOfPropertyChanged("Price");
+            }
+        }
+
+        /// <summary>
+        /// Gets and sets the calories.
+        /// </summary>
+        public uint Calories {
+            get { return _calories; }
+            set {
+                _calories = value;
+                NotifyOfPropertyChanged("Calories");
+            }
+        }
 
         /// <summary>
         /// Gets the list of ingredients in the Entree.
