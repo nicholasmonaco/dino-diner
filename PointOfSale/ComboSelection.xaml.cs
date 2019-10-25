@@ -28,6 +28,7 @@ namespace PointOfSale {
         /// </summary>
         public ComboSelection() {
             InitializeComponent();
+            this.ShowsNavigationUI = false;
         }
 
         /// <summary>

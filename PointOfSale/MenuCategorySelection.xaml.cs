@@ -28,6 +28,7 @@ namespace PointOfSale {
         /// </summary>
         public MenuCategorySelection() {
             InitializeComponent();
+            this.ShowsNavigationUI = false;
         }
 
         /// <summary>

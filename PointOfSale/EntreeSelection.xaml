@@ -20,13 +20,16 @@
                 </Style>
             </WrapPanel.Resources>
 
-            <Button Click="EntreeClick">Brontowurst</Button>
-            <Button Click="EntreeClick">Dino-Nuggets</Button>
-            <Button Click="EntreeClick">Prehistoric PB&amp;J</Button>
-            <Button Click="EntreeClick">Pterodactyl Wings</Button>
-            <Button Click="EntreeClick">Steakosaurus Burger</Button>
-            <Button Click="EntreeClick">T-Rex King Burger</Button>
-            <Button Click="EntreeClick">Veloci-Wrap</Button>
+            <Button Click="EntreeClick" Tag="Brontowurst">Brontowurst</Button>
+            <Button Click="EntreeClick" Tag="DinoNuggets">Dino-Nuggets</Button>
+            <Button Click="EntreeClick" Tag="PrehistoricPBJ">Prehistoric PB&amp;J</Button>
+            <Button Click="EntreeClick" Tag="PterodactylWings">Pterodactyl Wings</Button>
+            <Button Click="EntreeClick" Tag="SteakosaurusBurger">Steakosaurus Burger</Button>
+            <Button Click="EntreeClick" Tag="TRexKingBurger">T-Rex King Burger</Button>
+            <Button Click="EntreeClick" Tag="VelociWrap">Veloci-Wrap</Button>
         </WrapPanel>
+
+        <!-- <ContentControl Content="{Binding}" Grid.Row="1"/> -->
+        
     </Grid>
 </Page>

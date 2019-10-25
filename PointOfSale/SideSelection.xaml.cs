@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DinoDiner.Menu;
 
 namespace PointOfSale {
     /// <summary>
@@ -27,7 +28,7 @@ namespace PointOfSale {
         /// Gets and sets the size of the side.
         /// The setter is marked private.
         /// </summary>
-        public int Size { get; private set; }
+        public DinoDiner.Menu.Size Size { get; private set; }
 
 
         /// <summary>
@@ -35,14 +36,17 @@ namespace PointOfSale {
         /// </summary>
         public SideSelection() {
             InitializeComponent();
+            this.ShowsNavigationUI = false;
 
-            uxFryceritops.Background = Brushes.LightBlue;
+            this.DataContext = this;
+
+            uxFryceritops.Background = Brushes.White;
             uxMeteorMac.Background = Brushes.White;
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.White;
 
             uxSmallBox.Background = Brushes.White;
-            uxMediumBox.Background = Brushes.LightBlue;
+            uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
         }
 
@@ -55,7 +59,13 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.LightBlue;
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
-            Size = 0;
+            Size = DinoDiner.Menu.Size.Small;
+
+            if (DataContext is Order order) {
+                if(CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                    side.Size = DinoDiner.Menu.Size.Small;
+                }
+            }
         }
 
         /// <summary>
@@ -67,7 +77,13 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.LightBlue;
             uxLargeBox.Background = Brushes.White;
-            Size = 1;
+            Size = DinoDiner.Menu.Size.Medium;
+
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                    side.Size = DinoDiner.Menu.Size.Medium;
+                }
+            }
         }
 
         /// <summary>
@@ -79,7 +95,13 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.LightBlue;
-            Size = 2;
+            Size = DinoDiner.Menu.Size.Large;
+
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                    side.Size = DinoDiner.Menu.Size.Large;
+                }
+            }
         }
 
 
@@ -93,6 +115,8 @@ namespace PointOfSale {
             uxMeteorMac.Background = Brushes.White;
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.White;
+
+            AddItem(new Fryceritops());
         }
 
         /// <summary>
@@ -105,6 +129,8 @@ namespace PointOfSale {
             uxMeteorMac.Background = Brushes.LightBlue;
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.White;
+
+            AddItem(new MeteorMacAndCheese());
         }
 
         /// <summary>
@@ -117,6 +143,8 @@ namespace PointOfSale {
             uxMeteorMac.Background = Brushes.White;
             uxMezzorellaSticks.Background = Brushes.LightBlue;
             uxTriceritots.Background = Brushes.White;
+
+            AddItem(new MezzorellaSticks());
         }
 
         /// <summary>
@@ -129,6 +157,63 @@ namespace PointOfSale {
             uxMeteorMac.Background = Brushes.White;
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.LightBlue;
+
+            AddItem(new Triceritots());
+        }
+
+        /// <summary>
+        /// Handles what happens on the page when the selected item in the order is changed.
+        /// </summary>
+        public void UpdateButtons() {
+            uxFryceritops.Background = Brushes.White;
+            uxMeteorMac.Background = Brushes.White;
+            uxMezzorellaSticks.Background = Brushes.White;
+            uxTriceritots.Background = Brushes.White;
+
+            uxSmallBox.Background = Brushes.White;
+            uxMediumBox.Background = Brushes.White;
+            uxLargeBox.Background = Brushes.White;
+
+
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                    Size = side.Size;
+                    switch (Size) {
+                        case DinoDiner.Menu.Size.Small:
+                            uxSmallBox.Background = Brushes.LightBlue;
+                            break;
+                        case DinoDiner.Menu.Size.Medium:
+                            uxLargeBox.Background = Brushes.LightBlue;
+                            break;
+                        case DinoDiner.Menu.Size.Large:
+                            uxLargeBox.Background = Brushes.LightBlue;
+                            break;
+                    }
+
+                    if(side is Fryceritops fry) {
+                        uxFryceritops.Background = Brushes.LightBlue;
+                    }else if(side is MeteorMacAndCheese mac) {
+                        uxMeteorMac.Background = Brushes.LightBlue;
+                    } else if(side is MezzorellaSticks sticks) {
+                        uxMezzorellaSticks.Background = Brushes.LightBlue;
+                    } else if(side is Triceritots tots) {
+                        uxTriceritots.Background = Brushes.LightBlue;
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Adds the passed in side to the order.
+        /// </summary>
+        /// <param name="side">The side to add to the order.</param>
+        private void AddItem(Side side) {
+            if (DataContext is Order order) {
+                side.Size = Size;
+                order.Items.Add(side);
+                CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+            }
         }
     }
 }

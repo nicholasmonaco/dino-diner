@@ -45,7 +45,7 @@
                 <WrapPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Width" Value="170"/>
-                        <Setter Property="Height" Value="100"/>
+                        <Setter Property="Height" Value="82"/>
                         <Setter Property="Margin" Value="10,9,10,7"/>
                     </Style>
                 </WrapPanel.Resources>
@@ -59,7 +59,7 @@
                 <WrapPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Width" Value="170"/>
-                        <Setter Property="Height" Value="100"/>
+                        <Setter Property="Height" Value="82"/>
                         <Setter Property="Margin" Value="10,9,10,7"/>
                     </Style>
                 </WrapPanel.Resources>
@@ -78,6 +78,8 @@
 
         </Grid>
 
-        
+        <Button x:Name="uxDoneButton" Width="180" Height="70"
+                Margin="190,0,0,15" VerticalAlignment="Bottom" 
+                Content="Done" Click="DoneClick"/>
     </Grid>
 </Page>

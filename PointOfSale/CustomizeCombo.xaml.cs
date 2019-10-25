@@ -34,6 +34,7 @@ namespace PointOfSale {
         /// </summary>
         public CustomizeCombo() {
             InitializeComponent();
+            this.ShowsNavigationUI = false;
 
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.LightBlue;

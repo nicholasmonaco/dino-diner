@@ -3,13 +3,15 @@
 */
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
     /// <summary>
     /// Defines a single order at the Dino Diner.
     /// </summary>
-    public class Order {
+    public class Order : INotifyPropertyChanged{
 
         /// <summary>
         /// An ObservableCollection of all items on the current order.
@@ -58,8 +60,24 @@ namespace DinoDiner.Menu {
         /// </summary>
         public Order() {
             Items = new ObservableCollection<IOrderItem>();
+            this.Items.CollectionChanged += this.OnCollectionChanged;
             SalesTaxRate = 0.15; //15% sales tax
         }
 
+        /// <summary>
+        /// Notifies that certain properties will be updated when the colletion changes.
+        /// </summary>
+        /// <param name="sender">A sender variable.</param>
+        /// <param name="e">The arguments for this operation.</param>
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SubtotalCost"));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SalesTaxCost")); // These are commented out because they don't appear anywhere
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalCost"));
+        }
+
+        /// <summary>
+        /// The event handler that handles if any properties of the side were changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -96,7 +96,12 @@ namespace DinoDiner.Menu {
         /// </summary>
         /// <returns>The name and details of the drink as a string.</returns>
         public override string ToString() {
-            return $"{this.Size} {this.Flavor} Sodasaurus";
+            string flavorString = this.Flavor.ToString();
+            if(this.Flavor == SodasaurusFlavor.RootBeer) {
+                flavorString = "Root Beer";
+            }
+
+            return $"{this.Size} {flavorString} Sodasaurus";
         }
 
         /// <summary>

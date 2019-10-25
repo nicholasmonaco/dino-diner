@@ -54,11 +54,7 @@
                 <Button x:Name="uxLargeBox" Click="LargeClicked">Large</Button>
             </WrapPanel>
 
-            
-
-
         </Grid>
-
 
     </Grid>
 </Page>

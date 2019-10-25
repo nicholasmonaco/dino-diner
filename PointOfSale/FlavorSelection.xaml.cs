@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DinoDiner.Menu;
 
 namespace PointOfSale {
     /// <summary>
@@ -29,10 +30,10 @@ namespace PointOfSale {
         public DrinkSelection returnPage { get; set; }
 
         /// <summary>
-        /// The ID value of the selected flavor.
+        /// The value of the selected flavor.
         /// The setter is marked private.
         /// </summary>
-        public int flavorID { get; private set; }
+        public SodasaurusFlavor flavor { get; private set; }
 
 
         /// <summary>
@@ -40,7 +41,9 @@ namespace PointOfSale {
         /// </summary>
         public FlavorSelection() {
             InitializeComponent();
-            flavorID = -1;
+            this.ShowsNavigationUI = false;
+
+            flavor = SodasaurusFlavor.Cola;
         }
 
         /// <summary>
@@ -53,28 +56,28 @@ namespace PointOfSale {
 
             switch (pickedFlavor) {
                 case "Cherry":
-                    flavorID = 0;
+                    flavor = SodasaurusFlavor.Cherry;
                     break;
                 case "Chocolate":
-                    flavorID = 1;
+                    flavor = SodasaurusFlavor.Chocolate;
                     break;
                 case "Cola":
-                    flavorID = 2;
+                    flavor = SodasaurusFlavor.Cola;
                     break;
                 case "Lime":
-                    flavorID = 3;
+                    flavor = SodasaurusFlavor.Lime;
                     break;
                 case "Orange":
-                    flavorID = 4;
+                    flavor = SodasaurusFlavor.Orange;
                     break;
                 case "Root Beer":
-                    flavorID = 5;
+                    flavor = SodasaurusFlavor.RootBeer;
                     break;
                 case "Vanilla":
-                    flavorID = 6;
+                    flavor = SodasaurusFlavor.Vanilla;
                     break;
             }
-            returnPage.ChangeFlavor(flavorID);
+            returnPage.ChangeFlavor(flavor);
             NavigationService.Navigate(returnPage);
         }
     }
