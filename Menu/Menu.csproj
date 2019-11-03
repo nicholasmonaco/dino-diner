@@ -5,8 +5,4 @@
     <RootNamespace>DinoDiner.Menu</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Milestones\" />
-  </ItemGroup>
-
 </Project>
