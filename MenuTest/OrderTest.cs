@@ -18,10 +18,10 @@ namespace MenuTest {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Large;
 
-            up.Items.Add(bw1);
-            up.Items.Add(ft1);
-            up.Items.Add(ft2);
-            up.Items.Add(ss);
+            up.Add(bw1);
+            up.Add(ft1);
+            up.Add(ft2);
+            up.Add(ss);
 
             double expectedSubtotal = bw1.Price + ft1.Price + ft2.Price + ss.Price;
 
@@ -37,9 +37,9 @@ namespace MenuTest {
             Fryceritops ft2 = new Fryceritops();
             ft2.Price = -5000;
 
-            up.Items.Add(bw1);
-            up.Items.Add(ft1);
-            up.Items.Add(ft2);
+            up.Add(bw1);
+            up.Add(ft1);
+            up.Add(ft2);
 
             Assert.True(up.SubtotalCost >= 0);
         }
@@ -55,10 +55,10 @@ namespace MenuTest {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Large;
 
-            up.Items.Add(bw1);
-            up.Items.Add(ft1);
-            up.Items.Add(ft2);
-            up.Items.Add(ss);
+            up.Add(bw1);
+            up.Add(ft1);
+            up.Add(ft2);
+            up.Add(ss);
 
             double salesTaxCost = (bw1.Price + ft1.Price + ft2.Price + ss.Price) * up.SalesTaxRate;
 
@@ -76,10 +76,10 @@ namespace MenuTest {
             Sodasaurus ss = new Sodasaurus();
             ss.Size = Size.Large;
 
-            up.Items.Add(bw1);
-            up.Items.Add(ft1);
-            up.Items.Add(ft2);
-            up.Items.Add(ss);
+            up.Add(bw1);
+            up.Add(ft1);
+            up.Add(ft2);
+            up.Add(ss);
 
             double expectedSubtotal = bw1.Price + ft1.Price + ft2.Price + ss.Price;
             double salesTaxCost = (bw1.Price + ft1.Price + ft2.Price + ss.Price) * up.SalesTaxRate;

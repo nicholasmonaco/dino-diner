@@ -25,6 +25,17 @@ namespace PointOfSale {
     public partial class SideSelection : Page {
 
         /// <summary>
+        /// The page to return to when the side is done being selected.
+        /// </summary>
+        private Page _returnPage;
+
+        /// <summary>
+        /// The currently edited side, if applicable.
+        /// </summary>
+        private Side editedSide;
+
+
+        /// <summary>
         /// Gets and sets the size of the side.
         /// The setter is marked private.
         /// </summary>
@@ -48,6 +59,9 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
+
+            _returnPage = new MenuCategorySelection();
+            editedSide = null;
         }
 
         /// <summary>
@@ -66,6 +80,11 @@ namespace PointOfSale {
                     side.Size = DinoDiner.Menu.Size.Small;
                 }
             }
+
+            if (_returnPage is CustomizeCombo page) {
+                page.SetSide(editedSide);
+            }
+            NavigationService.Navigate(_returnPage);
         }
 
         /// <summary>
@@ -84,6 +103,11 @@ namespace PointOfSale {
                     side.Size = DinoDiner.Menu.Size.Medium;
                 }
             }
+
+            if (_returnPage is CustomizeCombo page) {
+                page.SetSide(editedSide);
+            }
+            NavigationService.Navigate(_returnPage);
         }
 
         /// <summary>
@@ -102,6 +126,11 @@ namespace PointOfSale {
                     side.Size = DinoDiner.Menu.Size.Large;
                 }
             }
+
+            if(_returnPage is CustomizeCombo page) {
+                page.SetSide(editedSide);
+            }
+            NavigationService.Navigate(_returnPage);
         }
 
 
@@ -116,7 +145,13 @@ namespace PointOfSale {
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.White;
 
-            AddItem(new Fryceritops());
+            if (editedSide == null) {
+                AddItem(new Fryceritops());
+            } else {
+                Fryceritops item = new Fryceritops();
+                item.Size = editedSide.Size;
+                editedSide = item;
+            }
         }
 
         /// <summary>
@@ -130,7 +165,13 @@ namespace PointOfSale {
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.White;
 
-            AddItem(new MeteorMacAndCheese());
+            if (editedSide == null) {
+                AddItem(new MeteorMacAndCheese());
+            } else {
+                MeteorMacAndCheese item = new MeteorMacAndCheese();
+                item.Size = editedSide.Size;
+                editedSide = item;
+            }
         }
 
         /// <summary>
@@ -144,7 +185,13 @@ namespace PointOfSale {
             uxMezzorellaSticks.Background = Brushes.LightBlue;
             uxTriceritots.Background = Brushes.White;
 
-            AddItem(new MezzorellaSticks());
+            if (editedSide == null) {
+                AddItem(new MezzorellaSticks());
+            } else {
+                MezzorellaSticks item = new MezzorellaSticks();
+                item.Size = editedSide.Size;
+                editedSide = item;
+            }
         }
 
         /// <summary>
@@ -158,7 +205,53 @@ namespace PointOfSale {
             uxMezzorellaSticks.Background = Brushes.White;
             uxTriceritots.Background = Brushes.LightBlue;
 
-            AddItem(new Triceritots());
+            if(editedSide == null) {
+                AddItem(new Triceritots());
+            } else {
+                Triceritots item = new Triceritots();
+                item.Size = editedSide.Size;
+                editedSide = item;
+            }
+        }
+
+        /// <summary>
+        /// Sets the currently edited side, updates the page accordingly, and sets the page
+        /// to navigate to after the side is done being selected.
+        /// </summary>
+        /// <param name="side">The side to load in.</param>
+        /// <param name="returnPage">The page to return to when the side is done being selected.</param>
+        public void SetEditedSide(Side side, Page returnPage) {
+            _returnPage = returnPage;
+
+            editedSide = side;
+
+            uxFryceritops.Background = Brushes.White;
+            uxMeteorMac.Background = Brushes.White;
+            uxMezzorellaSticks.Background = Brushes.White;
+            uxTriceritots.Background = Brushes.White;
+
+            uxSmallBox.Background = Brushes.White;
+            uxMediumBox.Background = Brushes.White;
+            uxLargeBox.Background = Brushes.White;
+            Size = side.Size;
+
+            if (side is Fryceritops fry) {
+                uxFryceritops.Background = Brushes.LightBlue;
+            } else if (side is MeteorMacAndCheese mmc) {
+                uxMeteorMac.Background = Brushes.LightBlue;
+            } else if (side is MezzorellaSticks ms) {
+                uxMezzorellaSticks.Background = Brushes.LightBlue;
+            } else if (side is Triceritots tt) {
+                uxTriceritots.Background = Brushes.LightBlue;
+            }
+
+            if(side.Size == DinoDiner.Menu.Size.Small) {
+                uxSmallBox.Background = Brushes.LightBlue;
+            } else if (side.Size == DinoDiner.Menu.Size.Medium) {
+                uxSmallBox.Background = Brushes.LightBlue;
+            } else if (side.Size == DinoDiner.Menu.Size.Large) {
+                uxLargeBox.Background = Brushes.LightBlue;
+            }
         }
 
         /// <summary>
@@ -177,7 +270,7 @@ namespace PointOfSale {
 
             if (DataContext is Order order) {
                 if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
-                    Size = side.Size;
+                    /*Size = side.Size;
                     switch (Size) {
                         case DinoDiner.Menu.Size.Small:
                             uxSmallBox.Background = Brushes.LightBlue;
@@ -188,7 +281,7 @@ namespace PointOfSale {
                         case DinoDiner.Menu.Size.Large:
                             uxLargeBox.Background = Brushes.LightBlue;
                             break;
-                    }
+                    }*/
 
                     if(side is Fryceritops fry) {
                         uxFryceritops.Background = Brushes.LightBlue;
@@ -211,7 +304,7 @@ namespace PointOfSale {
         private void AddItem(Side side) {
             if (DataContext is Order order) {
                 side.Size = Size;
-                order.Items.Add(side);
+                order.Add(side);
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
             }
         }

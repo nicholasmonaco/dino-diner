@@ -29,6 +29,17 @@ namespace DinoDiner.Menu {
             this.Calories = 318;
         }
 
+        /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// Nothing can be held from Pterodactyl Wings, but the method is here regardless.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+
+            NotifyOfPropertyChanged("Special");
+        }
+
 
         /// <summary>
         /// Returns the name of the entree.

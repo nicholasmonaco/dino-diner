@@ -41,33 +41,42 @@ namespace PointOfSale {
         /// <param name="args">The RoutedEventArgs.</param>
         private void EntreeClick(object sender, RoutedEventArgs args) {
             Button b = sender as Button;
+
             if(b != null) {
+                Entree entree = new Brontowurst();
+
                 switch (b.Tag) {
                     case "Brontowurst":
-                        AddItem(new Brontowurst());
+                        entree = new Brontowurst();
                         break;
                     case "DinoNuggets":
-                        AddItem(new DinoNuggets());
+                        entree = new DinoNuggets();
                         break;
                     case "PrehistoricPBJ":
-                        AddItem(new PrehistoricPBJ());
+                        entree = new PrehistoricPBJ();
                         break;
                     case "PterodactylWings":
-                        AddItem(new PterodactylWings());
+                        entree = new PterodactylWings();
                         break;
                     case "SteakosaurusBurger":
-                        AddItem(new SteakosaurusBurger());
+                        entree = new SteakosaurusBurger();
                         break;
                     case "TRexKingBurger":
-                        AddItem(new TRexKingBurger());
+                        entree = new TRexKingBurger();
                         break;
                     case "VelociWrap":
-                        AddItem(new VelociWrap());
+                        entree = new VelociWrap();
                         break;
                 }
-            }
 
-            NavigationService.Navigate(new MenuCategorySelection());
+                AddItem(entree);
+
+                CustomizeEntree nextPage = new CustomizeEntree();
+                nextPage.InitPage(entree, new MenuCategorySelection());
+                NavigationService.Navigate(nextPage);
+            }
+            
+            //NavigationService.Navigate(new MenuCategorySelection());
         }
 
         /// <summary>
@@ -76,7 +85,7 @@ namespace PointOfSale {
         /// <param name="entree">The entree to add to the order.</param>
         private void AddItem(Entree entree) {
             if (DataContext is Order order) {
-                order.Items.Add(entree);
+                order.Add(entree);
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
             }
         }

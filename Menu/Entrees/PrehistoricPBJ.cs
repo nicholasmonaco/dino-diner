@@ -16,12 +16,12 @@ namespace DinoDiner.Menu
         /// <summary>
         /// Indicates if the entree has peanut butter.
         /// </summary>
-        private bool peanutButter = true;
+        public bool PeanutButter { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has jelly.
         /// </summary>
-        private bool jelly = true;
+        public bool Jelly { get; set; } = true;
 
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace DinoDiner.Menu
         public override List<string> Ingredients{
             get{
                 List<string> ingredients = new List<string>() { "Bread" };
-                if (peanutButter) ingredients.Add("Peanut Butter");
-                if (jelly) ingredients.Add("Jelly");
+                if (PeanutButter) ingredients.Add("Peanut Butter");
+                if (Jelly) ingredients.Add("Jelly");
                 return ingredients;
             }
         }
@@ -45,10 +45,28 @@ namespace DinoDiner.Menu
         }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+            switch (index) {
+                case 0:
+                    PeanutButter = newVal;
+                    break;
+                case 1:
+                    Jelly = newVal;
+                    break;
+            }
+
+            NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
         /// Holds the peanut butter from the entree.
         /// </summary>
         public void HoldPeanutButter(){
-            this.peanutButter = false;
+            this.PeanutButter = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -56,7 +74,7 @@ namespace DinoDiner.Menu
         /// Holds the jelly from the entree.
         /// </summary>
         public void HoldJelly(){
-            this.jelly = false;
+            this.Jelly = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -81,8 +99,8 @@ namespace DinoDiner.Menu
         public override string[] Special {
             get {
                 List<string> details = new List<string>(2);
-                if (!this.peanutButter) { details.Add("Hold Peanut Butter"); }
-                if (!this.jelly) { details.Add("Hold Jelly"); }
+                if (!this.PeanutButter) { details.Add("Hold Peanut Butter"); }
+                if (!this.Jelly) { details.Add("Hold Jelly"); }
 
                 return details.ToArray();
             }

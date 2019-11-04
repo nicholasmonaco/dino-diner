@@ -32,6 +32,11 @@ namespace DinoDiner.Menu {
         /// </summary>
         private string _toy;
 
+        /// <summary>
+        /// Holds the current Size of the combo.
+        /// </summary>
+        private Size _size;
+
 
         /// <summary>
         /// Gets and sets the entree.
@@ -52,6 +57,7 @@ namespace DinoDiner.Menu {
             get { return _side; }
             set {
                 _side = value;
+                this._side.PropertyChanged += ItemChangeNotify;
                 NotifyOfPropertyChanged("Special");
                 NotifyOfPropertyChanged("Side");
             }
@@ -64,6 +70,7 @@ namespace DinoDiner.Menu {
             get { return _drink; }
             set {
                 _drink = value;
+                this._drink.PropertyChanged += ItemChangeNotify;
                 NotifyOfPropertyChanged("Special");
                 NotifyOfPropertyChanged("Drink");
             }
@@ -121,6 +128,9 @@ namespace DinoDiner.Menu {
         public CretaceousCombo(Entree e) {
             this.Entree = e;
             this.Toy = "Random Toy";
+
+            this._side.PropertyChanged += ItemChangeNotify;
+            this._drink.PropertyChanged += ItemChangeNotify;
         }
 
         /// <summary>
@@ -161,6 +171,36 @@ namespace DinoDiner.Menu {
                 return details.ToArray();
             }
         }
+
+        /// <summary>
+        /// Gets and sets the size of the combo, which trickles down into it's components.
+        /// The setter also adjusts the price and calories of the combo accordingly.
+        /// </summary>
+        public Size Size {
+            get {
+                return _size;
+            }
+            set {
+                _drink.Size = value;
+                _side.Size = value;
+
+                NotifyOfPropertyChanged("Size");
+            }
+        }
+
+
+        /// <summary>
+        /// Notifies of updates of the relevant properties when properties of and item is changed.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The PropertyChangedEvetArgs.</param>
+        private void ItemChangeNotify(object sender, PropertyChangedEventArgs e) {
+            NotifyOfPropertyChanged("Description");
+            NotifyOfPropertyChanged("Special");
+            NotifyOfPropertyChanged("Price");
+            NotifyOfPropertyChanged("Calories");
+        }
+
 
         /// <summary>
         /// The event handler that handles if any properties of the combo were changed.

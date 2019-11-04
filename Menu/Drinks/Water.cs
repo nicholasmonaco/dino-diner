@@ -73,6 +73,8 @@ namespace DinoDiner.Menu {
                 _size = value;
                 NotifyOfPropertyChanged("Description");
                 NotifyOfPropertyChanged("Size");
+                NotifyOfPropertyChanged("Price"); //This and calories never change with water, but whatever.
+                NotifyOfPropertyChanged("Calories");
             }
         }
 

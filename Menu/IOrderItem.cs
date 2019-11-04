@@ -1,6 +1,7 @@
 ﻿/*  IMenuItem.cs
 *   Author: Nick Monaco
 */
+using System.ComponentModel;
 
 namespace DinoDiner.Menu {
 
@@ -23,5 +24,11 @@ namespace DinoDiner.Menu {
         /// A list of special instructions for food preperation.
         /// </summary>
         string[] Special { get; }
+
+
+        /// <summary>
+        /// The event handler that handles if any properties were changed.
+        /// </summary>
+        event PropertyChangedEventHandler PropertyChanged;
     }
 }

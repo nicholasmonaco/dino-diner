@@ -14,42 +14,42 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Indicates if the entree has a bun.
         /// </summary>
-        private bool bun = true;
+        public bool Bun { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has lettuce.
         /// </summary>
-        private bool lettuce = true;
+        public bool Lettuce { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has tomato.
         /// </summary>
-        private bool tomato = true;
+        public bool Tomato { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has onion.
         /// </summary>
-        private bool onion = true;
+        public bool Onion { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has pickles.
         /// </summary>
-        private bool pickle = true;
+        public bool Pickle { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has ketchup.
         /// </summary>
-        private bool ketchup = true;
+        public bool Ketchup { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has mustard.
         /// </summary>
-        private bool mustard = true;
+        public bool Mustard { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has mayo.
         /// </summary>
-        private bool mayo = true;
+        public bool Mayo { get; set; } = true;
 
 
         /// <summary>
@@ -58,14 +58,14 @@ namespace DinoDiner.Menu {
         public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>() { "Steakburger Pattie", "Steakburger Pattie", "Steakburger Pattie" };
-                if (bun) ingredients.Add("Whole Wheat Bun");
-                if (lettuce) ingredients.Add("Lettuce");
-                if (tomato) ingredients.Add("Tomato");
-                if (onion) ingredients.Add("Onion");
-                if (pickle) ingredients.Add("Pickle");
-                if (ketchup) ingredients.Add("Ketchup");
-                if (mustard) ingredients.Add("Mustard");
-                if (mayo) ingredients.Add("Mayo");
+                if (Bun) ingredients.Add("Whole Wheat Bun");
+                if (Lettuce) ingredients.Add("Lettuce");
+                if (Tomato) ingredients.Add("Tomato");
+                if (Onion) ingredients.Add("Onion");
+                if (Pickle) ingredients.Add("Pickle");
+                if (Ketchup) ingredients.Add("Ketchup");
+                if (Mustard) ingredients.Add("Mustard");
+                if (Mayo) ingredients.Add("Mayo");
                 return ingredients;
             }
         }
@@ -79,10 +79,46 @@ namespace DinoDiner.Menu {
         }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+            switch (index) {
+                case 0:
+                    Bun = newVal;
+                    break;
+                case 1:
+                    Lettuce = newVal;
+                    break;
+                case 2:
+                    Tomato = newVal;
+                    break;
+                case 3:
+                    Onion = newVal;
+                    break;
+                case 4:
+                    Pickle = newVal;
+                    break;
+                case 5:
+                    Ketchup = newVal;
+                    break;
+                case 6:
+                    Mustard = newVal;
+                    break;
+                case 7:
+                    Mayo = newVal;
+                    break;
+            }
+
+            NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
         /// Holds the whole wheat bun from the entree.
         /// </summary>
         public void HoldBun() {
-            this.bun = false;
+            this.Bun = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -90,7 +126,7 @@ namespace DinoDiner.Menu {
         /// Holds the lettuce from the entree.
         /// </summary>
         public void HoldLettuce() {
-            this.lettuce = false;
+            this.Lettuce = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -98,7 +134,7 @@ namespace DinoDiner.Menu {
         /// Holds the tomato from the entree.
         /// </summary>
         public void HoldTomato() {
-            this.tomato = false;
+            this.Tomato = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -106,7 +142,7 @@ namespace DinoDiner.Menu {
         /// Holds the onion from the entree.
         /// </summary>
         public void HoldOnion() {
-            this.onion = false;
+            this.Onion = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -114,7 +150,7 @@ namespace DinoDiner.Menu {
         /// Holds the pickle from the entree.
         /// </summary>
         public void HoldPickle() {
-            this.pickle = false;
+            this.Pickle = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -122,7 +158,7 @@ namespace DinoDiner.Menu {
         /// Holds the ketchup from the entree.
         /// </summary>
         public void HoldKetchup() {
-            this.ketchup = false;
+            this.Ketchup = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -130,7 +166,7 @@ namespace DinoDiner.Menu {
         /// Holds the mustard from the entree.
         /// </summary>
         public void HoldMustard() {
-            this.mustard = false;
+            this.Mustard = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -138,7 +174,7 @@ namespace DinoDiner.Menu {
         /// Holds the mayo from the entree.
         /// </summary>
         public void HoldMayo() {
-            this.mayo = false;
+            this.Mayo = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -163,14 +199,14 @@ namespace DinoDiner.Menu {
         public override string[] Special {
             get {
                 List<string> details = new List<string>(8);
-                if (!this.bun) { details.Add("Hold Bun"); }
-                if (!this.lettuce) { details.Add("Hold Lettuce"); }
-                if (!this.tomato) { details.Add("Hold Tomato"); }
-                if (!this.onion) { details.Add("Hold Onion"); }
-                if (!this.pickle) { details.Add("Hold Pickle"); }
-                if (!this.ketchup) { details.Add("Hold Ketchup"); }
-                if (!this.mustard) { details.Add("Hold Mustard"); }
-                if (!this.mayo) { details.Add("Hold Mayo"); }
+                if (!this.Bun) { details.Add("Hold Bun"); }
+                if (!this.Lettuce) { details.Add("Hold Lettuce"); }
+                if (!this.Tomato) { details.Add("Hold Tomato"); }
+                if (!this.Onion) { details.Add("Hold Onion"); }
+                if (!this.Pickle) { details.Add("Hold Pickle"); }
+                if (!this.Ketchup) { details.Add("Hold Ketchup"); }
+                if (!this.Mustard) { details.Add("Hold Mustard"); }
+                if (!this.Mayo) { details.Add("Hold Mayo"); }
 
                 return details.ToArray();
             }

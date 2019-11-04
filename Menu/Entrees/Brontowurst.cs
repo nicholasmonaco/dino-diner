@@ -14,17 +14,17 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Indicates if the entree has a bun.
         /// </summary>
-        private bool bun = true;
+        public bool Bun { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has peppers.
         /// </summary>
-        private bool peppers = true;
+        public bool Peppers { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has onion.
         /// </summary>
-        private bool onion = true;
+        public bool Onion { get; set; } = true;
 
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace DinoDiner.Menu {
         public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>() { "Brautwurst" };
-                if (bun) ingredients.Add("Whole Wheat Bun");
-                if (peppers) ingredients.Add("Peppers");
-                if (onion) ingredients.Add("Onion");
+                if (Bun) ingredients.Add("Whole Wheat Bun");
+                if (Peppers) ingredients.Add("Peppers");
+                if (Onion) ingredients.Add("Onion");
                 return ingredients;
             }
         }
@@ -48,11 +48,33 @@ namespace DinoDiner.Menu {
             this.Calories = 498;
         }
 
+
+        /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+            switch (index) {
+                case 0:
+                    Bun = newVal;
+                    break;
+                case 1:
+                    Peppers = newVal;
+                    break;
+                case 2:
+                    Onion = newVal;
+                    break;
+            }
+
+            NotifyOfPropertyChanged("Special");
+        }
+
         /// <summary>
         /// Holds the whole wheat bun from the entree.
         /// </summary>
         public void HoldBun() {
-            this.bun = false;
+            this.Bun = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -60,7 +82,7 @@ namespace DinoDiner.Menu {
         /// Holds the peppers from the entree.
         /// </summary>
         public void HoldPeppers() {
-            this.peppers = false;
+            this.Peppers = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -68,7 +90,7 @@ namespace DinoDiner.Menu {
         /// Holds the onion from the entree.
         /// </summary>
         public void HoldOnion() {
-            this.onion = false;
+            this.Onion = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -93,9 +115,9 @@ namespace DinoDiner.Menu {
         public override string[] Special {
             get {
                 List<string> details = new List<string>(3);
-                if (!this.bun) { details.Add("Hold Bun"); }
-                if (!this.peppers) { details.Add("Hold Peppers"); }
-                if (!this.onion) { details.Add("Hold Onion"); }
+                if (!this.Bun) { details.Add("Hold Bun"); }
+                if (!this.Peppers) { details.Add("Hold Peppers"); }
+                if (!this.Onion) { details.Add("Hold Onion"); }
 
                 return details.ToArray();
             }

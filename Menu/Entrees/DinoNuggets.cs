@@ -14,7 +14,7 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Indicates how many nuggets are in the entree.
         /// </summary>
-        private int nugCount = 6;
+        public int NuggetCount { get; private set; } = 6;
 
         /// <summary>
         /// Defines the ingredients that exist in the entree.
@@ -23,7 +23,7 @@ namespace DinoDiner.Menu {
         public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>();
-                for(int i = 0; i < nugCount; i++) {
+                for(int i = 0; i < NuggetCount; i++) {
                     ingredients.Add("Chicken Nugget");
                 }
                 return ingredients;
@@ -39,11 +39,22 @@ namespace DinoDiner.Menu {
         }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// Unused in DinoNugget.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+
+            NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
         /// Adds one more nugget to Ingredients.
         /// This method also updates nugCount, Price, and Calories accordingly.
         /// </summary>
         public void AddNugget() {
-            nugCount++;
+            NuggetCount++;
             this.Price += 0.25;
             this.Calories += 59;
             Ingredients.Add("Chicken Nugget");
@@ -51,6 +62,23 @@ namespace DinoDiner.Menu {
             NotifyOfPropertyChanged("Price");
             NotifyOfPropertyChanged("Calories");
             NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
+        /// Removes an extra nugget, if there are any.
+        /// This method also updates nugCount, Price, and Calories accordingly.
+        /// </summary>
+        public void RemoveNugget() {
+            if(NuggetCount > 6) {
+                NuggetCount--;
+                this.Price -= 0.25;
+                this.Calories -= 59;
+                Ingredients.Remove("Chicken Nugget");
+
+                NotifyOfPropertyChanged("Price");
+                NotifyOfPropertyChanged("Calories");
+                NotifyOfPropertyChanged("Special");
+            }
         }
 
         /// <summary>
@@ -75,10 +103,10 @@ namespace DinoDiner.Menu {
             get {
                 List<string> details = new List<string>(1);
 
-                if (this.nugCount == 7) {
+                if (this.NuggetCount == 7) {
                     details.Add("Add 1 Extra Nugget");
-                }else if(this.nugCount > 7) {
-                    details.Add($"Add {nugCount - 6} Extra Nuggets");
+                }else if(this.NuggetCount > 7) {
+                    details.Add($"Add {NuggetCount - 6} Extra Nuggets");
                 }
 
                 return details.ToArray();

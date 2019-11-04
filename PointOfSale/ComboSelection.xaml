@@ -9,6 +9,8 @@
       Title="ComboSelection">
 
     <Grid>
+        <Button x:Name="uxDone" Width="120" Height="70" HorizontalAlignment="Right" Margin="0,135,20,0" Click="DoneClick">Done</Button>
+        
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0">Add to Order</TextBlock>
 
         <WrapPanel VerticalAlignment="Center">
@@ -20,25 +22,27 @@
                 </Style>
             </WrapPanel.Resources>
 
-            <Button Click="ComboClick">
-                <TextBlock>Brontowusrt<LineBreak/>Combo</TextBlock>
+            
+            
+            <Button Click="ComboClick" Tag="Brontowurst">
+                <TextBlock>Brontowurst<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="Steakosaurus">
                 <TextBlock>Steakosaurus Burger<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="T-Rex">
                 <TextBlock>T-Rex King Burger<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="Prehistoric">
                 <TextBlock>Prehistoric PB&amp;J<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="Pterodactyl">
                 <TextBlock>Pterodactyl Wings<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="Veloci-Wrap">
                 <TextBlock>Veloci-Wrap<LineBreak/>Combo</TextBlock>
             </Button>
-            <Button Click="ComboClick">
+            <Button Click="ComboClick" Tag="Dino-Nuggets">
                 <TextBlock>Dino-Nuggets<LineBreak/>Combo</TextBlock>
             </Button>
         </WrapPanel>

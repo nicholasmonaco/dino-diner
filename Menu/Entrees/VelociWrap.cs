@@ -14,17 +14,17 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Indicates if the entree has dressing.
         /// </summary>
-        private bool dressing = true;
+        public bool Dressing { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has lettuce.
         /// </summary>
-        private bool lettuce = true;
+        public bool Lettuce { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has cheese.
         /// </summary>
-        private bool cheese = true;
+        public bool Cheese { get; set; } = true;
 
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace DinoDiner.Menu {
         public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>() { "Flour Tortilla", "Chicken Breast" };
-                if (dressing) ingredients.Add("Ceasar Dressing");
-                if (lettuce) ingredients.Add("Romaine Lettuce");
-                if (cheese) ingredients.Add("Parmesan Cheese");
+                if (Dressing) ingredients.Add("Ceasar Dressing");
+                if (Lettuce) ingredients.Add("Romaine Lettuce");
+                if (Cheese) ingredients.Add("Parmesan Cheese");
                 return ingredients;
             }
         }
@@ -49,10 +49,31 @@ namespace DinoDiner.Menu {
         }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+            switch (index) {
+                case 0:
+                    Dressing = newVal;
+                    break;
+                case 1:
+                    Lettuce = newVal;
+                    break;
+                case 2:
+                    Cheese = newVal;
+                    break;
+            }
+
+            NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
         /// Holds the Ceasar dressing from the entree.
         /// </summary>
         public void HoldDressing() {
-            this.dressing = false;
+            this.Dressing = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -60,7 +81,7 @@ namespace DinoDiner.Menu {
         /// Holds the romaine lettuce from the entree.
         /// </summary>
         public void HoldLettuce() {
-            this.lettuce = false;
+            this.Lettuce = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -68,7 +89,7 @@ namespace DinoDiner.Menu {
         /// Holds the parmesan cheese from the entree.
         /// </summary>
         public void HoldCheese() {
-            this.cheese = false;
+            this.Cheese = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -93,9 +114,9 @@ namespace DinoDiner.Menu {
         public override string[] Special {
             get {
                 List<string> details = new List<string>(3);
-                if (!this.dressing) { details.Add("Hold Dressing"); }
-                if (!this.lettuce) { details.Add("Hold Lettuce"); }
-                if (!this.cheese) { details.Add("Hold Cheese"); }
+                if (!this.Dressing) { details.Add("Hold Dressing"); }
+                if (!this.Lettuce) { details.Add("Hold Lettuce"); }
+                if (!this.Cheese) { details.Add("Hold Cheese"); }
                 return details.ToArray();
             }
         }

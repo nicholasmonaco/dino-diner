@@ -59,6 +59,13 @@ namespace DinoDiner.Menu {
         public abstract string[] Special { get; }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public abstract void ChangeHold(int index, bool newVal);
+
+        /// <summary>
         /// The event handler that handles if any properties of the entree were changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;

@@ -42,7 +42,7 @@ namespace PointOfSale {
             IOrderItem item = b.Tag as IOrderItem;
 
             if (DataContext is Order order && item != null) {
-                order.Items.Remove(item);
+                order.Remove(item);
             }
         }
 
@@ -53,7 +53,7 @@ namespace PointOfSale {
         /// <param name="args">The RoutedEventArgs tied to this event.</param>
         public void ClearClick(object sender, RoutedEventArgs args) {
             if (DataContext is Order order) {
-                order.Items.Clear();
+                order.Clear();
             }
         }
     }

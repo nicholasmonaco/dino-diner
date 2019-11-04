@@ -14,22 +14,22 @@ namespace DinoDiner.Menu {
         /// <summary>
         /// Indicates if the entree has a bun.
         /// </summary>
-        private bool bun = true;
+        public bool Bun { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has pickles.
         /// </summary>
-        private bool pickle = true;
+        public bool Pickle { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has ketchup.
         /// </summary>
-        private bool ketchup = true;
+        public bool Ketchup { get; set; } = true;
 
         /// <summary>
         /// Indicates if the entree has mustard.
         /// </summary>
-        private bool mustard = true;
+        public bool Mustard { get; set; } = true;
 
 
         /// <summary>
@@ -38,10 +38,10 @@ namespace DinoDiner.Menu {
         public override List<string> Ingredients {
             get {
                 List<string> ingredients = new List<string>() { "Steakburger Pattie" };
-                if (bun) ingredients.Add("Whole Wheat Bun");
-                if (pickle) ingredients.Add("Pickle");
-                if (ketchup) ingredients.Add("Ketchup");
-                if (mustard) ingredients.Add("Mustard");
+                if (Bun) ingredients.Add("Whole Wheat Bun");
+                if (Pickle) ingredients.Add("Pickle");
+                if (Ketchup) ingredients.Add("Ketchup");
+                if (Mustard) ingredients.Add("Mustard");
                 return ingredients;
             }
         }
@@ -55,10 +55,34 @@ namespace DinoDiner.Menu {
         }
 
         /// <summary>
+        /// Changes the specified holdable ingredient to the specified value.
+        /// </summary>
+        /// <param name="index">The index of the holdable ingredient.</param>
+        /// <param name="newVal">The new value of whether or not the ingredient should be held.</param>
+        public override void ChangeHold(int index, bool newVal) {
+            switch (index) {
+                case 0:
+                    Bun = newVal;
+                    break;
+                case 1:
+                    Pickle = newVal;
+                    break;
+                case 2:
+                    Ketchup = newVal;
+                    break;
+                case 3:
+                    Mustard = newVal;
+                    break;
+            }
+
+            NotifyOfPropertyChanged("Special");
+        }
+
+        /// <summary>
         /// Holds the whole wheat bun from the entree.
         /// </summary>
         public void HoldBun() {
-            this.bun = false;
+            this.Bun = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -66,7 +90,7 @@ namespace DinoDiner.Menu {
         /// Holds the pickle from the entree.
         /// </summary>
         public void HoldPickle() {
-            this.pickle = false;
+            this.Pickle = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -74,7 +98,7 @@ namespace DinoDiner.Menu {
         /// Holds the ketchup from the entree.
         /// </summary>
         public void HoldKetchup() {
-            this.ketchup = false;
+            this.Ketchup = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -82,7 +106,7 @@ namespace DinoDiner.Menu {
         /// Holds the mustard from the entree.
         /// </summary>
         public void HoldMustard() {
-            this.mustard = false;
+            this.Mustard = false;
             NotifyOfPropertyChanged("Special");
         }
 
@@ -107,10 +131,10 @@ namespace DinoDiner.Menu {
         public override string[] Special {
             get {
                 List<string> details = new List<string>(4);
-                if (!this.bun) { details.Add("Hold Bun"); }
-                if (!this.pickle) { details.Add("Hold Pickle"); }
-                if (!this.ketchup) { details.Add("Hold Ketchup"); }
-                if (!this.mustard) { details.Add("Hold Mustard"); }
+                if (!this.Bun) { details.Add("Hold Bun"); }
+                if (!this.Pickle) { details.Add("Hold Pickle"); }
+                if (!this.Ketchup) { details.Add("Hold Ketchup"); }
+                if (!this.Mustard) { details.Add("Hold Mustard"); }
 
                 return details.ToArray();
             }

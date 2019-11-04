@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DinoDiner.Menu;
 
 namespace PointOfSale {
     /// <summary>
@@ -24,10 +25,16 @@ namespace PointOfSale {
     public partial class CustomizeCombo : Page {
 
         /// <summary>
+        /// The combo item.
+        /// </summary>
+        private CretaceousCombo _combo;
+
+
+        /// <summary>
         /// Gets and sets the size of the combo.
         /// The setter is marked private.
         /// </summary>
-        public int Size { get; private set; }
+        public DinoDiner.Menu.Size Size { get; private set; }
 
         /// <summary>
         /// Constructs the CustomizeCombo page.
@@ -36,10 +43,10 @@ namespace PointOfSale {
             InitializeComponent();
             this.ShowsNavigationUI = false;
 
-            uxSmallBox.Background = Brushes.White;
-            uxMediumBox.Background = Brushes.LightBlue;
+            uxSmallBox.Background = Brushes.LightBlue;
+            uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
-            Size = 1;
+            Size = DinoDiner.Menu.Size.Small;
         }
 
         /// <summary>
@@ -51,7 +58,10 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.LightBlue;
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
-            Size = 0;
+            Size = DinoDiner.Menu.Size.Small;
+
+            SetSide(_combo.Side);
+            SetDrink(_combo.Drink);
         }
 
         /// <summary>
@@ -63,7 +73,10 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.LightBlue;
             uxLargeBox.Background = Brushes.White;
-            Size = 1;
+            Size = DinoDiner.Menu.Size.Medium;
+
+            SetSide(_combo.Side);
+            SetDrink(_combo.Drink);
         }
 
         /// <summary>
@@ -75,7 +88,10 @@ namespace PointOfSale {
             uxSmallBox.Background = Brushes.White;
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.LightBlue;
-            Size = 2;
+            Size = DinoDiner.Menu.Size.Large;
+
+            SetSide(_combo.Side);
+            SetDrink(_combo.Drink);
         }
 
         /// <summary>
@@ -84,7 +100,9 @@ namespace PointOfSale {
         /// <param name="sender">The object being clicked.</param>
         /// <param name="e">The RoutedEventArgs.</param>
         private void SideClick(object sender, RoutedEventArgs e) {
-            NavigationService.Navigate(new SideSelection());
+            SideSelection page = new SideSelection();
+            page.SetEditedSide(_combo.Side, this);
+            NavigationService.Navigate(page);
         }
 
         /// <summary>
@@ -93,7 +111,69 @@ namespace PointOfSale {
         /// <param name="sender">The object being clicked.</param>
         /// <param name="e">The RoutedEventArgs.</param>
         private void DrinkClick(object sender, RoutedEventArgs e) {
-            NavigationService.Navigate(new DrinkSelection());
+            DrinkSelection page = new DrinkSelection();
+            page.SetReturnPage(this);
+            page.SetEditedDrink(_combo.Drink);
+            NavigationService.Navigate(page);
+        }
+
+        /// <summary>
+        /// Handles what happens when the Customize Entree button is clicked.
+        /// </summary>
+        /// <param name="sender">The object being clicked.</param>
+        /// <param name="e">The RoutedEventArgs.</param>
+        private void EntreeClick(object sender, RoutedEventArgs e) {
+            CustomizeEntree page = new CustomizeEntree();
+            page.InitPage(_combo.Entree, this);
+            page.SetEditedEntree(_combo.Entree);
+            NavigationService.Navigate(page);
+        }
+
+        /// <summary>
+        /// Handles what happens when the Done button is clicked.
+        /// </summary>
+        /// <param name="sender">The object being clicked.</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void DoneClick(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new MenuCategorySelection());
+        }
+
+        /// <summary>
+        /// Sets the entree of the combo,
+        /// </summary>
+        /// <param name="entree">The entree to set as the combo's entree.</param>
+        public void SetEntree(Entree entree) {
+            _combo.Entree = entree;
+        }
+
+        /// <summary>
+        /// Sets the side of the combo,
+        /// </summary>
+        /// <param name="entree">The side to set as the combo's side.</param>
+        public void SetSide(Side side) {
+            side.Size = this.Size;
+            _combo.Side = side;
+            uxSide.Content = side.Description;
+        }
+
+        /// <summary>
+        /// Sets the drink of the combo,
+        /// </summary>
+        /// <param name="entree">The drink to set as the combo's drink.</param>
+        public void SetDrink(Drink drink) {
+            drink.Size = this.Size;
+            _combo.Drink = drink;
+            uxDrink.Content = drink.Description;
+        }
+
+        /// <summary>
+        /// Sets the combo.
+        /// </summary>
+        /// <param name="combo">The combo to set.</param>
+        public void SetCombo(CretaceousCombo combo) {
+            _combo = combo;
+            SetSide(combo.Side);
+            SetDrink(combo.Drink);
         }
 
     }
