@@ -102,6 +102,8 @@ namespace DinoDiner.Menu {
 
             NotifyOfPropertyChanged("Items");
             NotifyOfPropertyChanged("SubtotalCost");
+            NotifyOfPropertyChanged("SalesTaxCost");
+            NotifyOfPropertyChanged("TotalCost");
         }
 
         /// <summary>
@@ -115,6 +117,8 @@ namespace DinoDiner.Menu {
 
             NotifyOfPropertyChanged("Items");
             NotifyOfPropertyChanged("SubtotalCost");
+            NotifyOfPropertyChanged("SalesTaxCost");
+            NotifyOfPropertyChanged("TotalCost");
         }
 
         /// <summary>
@@ -127,6 +131,8 @@ namespace DinoDiner.Menu {
 
             NotifyOfPropertyChanged("Items");
             NotifyOfPropertyChanged("SubtotalCost");
+            NotifyOfPropertyChanged("SalesTaxCost");
+            NotifyOfPropertyChanged("TotalCost");
         }
 
 
@@ -136,6 +142,7 @@ namespace DinoDiner.Menu {
         /// <param name="sender">A sender variable.</param>
         /// <param name="e">The arguments for this operation.</param>
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            NotifyOfPropertyChanged("Items");
             NotifyOfPropertyChanged("SubtotalCost");
             NotifyOfPropertyChanged("SalesTaxCost");
             NotifyOfPropertyChanged("TotalCost");
@@ -150,7 +157,6 @@ namespace DinoDiner.Menu {
             NotifyOfPropertyChanged("SubtotalCost");
             NotifyOfPropertyChanged("SalesTaxCost");
             NotifyOfPropertyChanged("TotalCost");
-            
         }
 
 

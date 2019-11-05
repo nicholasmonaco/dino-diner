@@ -116,6 +116,7 @@ namespace PointOfSale {
                     //Console.WriteLine("Selected a combo");
                     CustomizeCombo page = new CustomizeCombo();
                     page.SetReturnPage(new MenuCategorySelection());
+                    Console.WriteLine("Combo size: " + combo.Size);
                     page.SetCombo(combo);
                     MainWindow window = Window.GetWindow(this) as MainWindow;
                     window.GetCurrentPage().NavigationService.Navigate(page);

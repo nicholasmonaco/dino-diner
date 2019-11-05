@@ -67,6 +67,12 @@ namespace PointOfSale {
             Size = DinoDiner.Menu.Size.Small;
             _combo.Size = DinoDiner.Menu.Size.Small;
 
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo com) {
+                    com.Size = _combo.Size;
+                }
+            }
+
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
         }
@@ -83,6 +89,13 @@ namespace PointOfSale {
             Size = DinoDiner.Menu.Size.Medium;
             _combo.Size = DinoDiner.Menu.Size.Medium;
 
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo com) {
+                    com.Size = _combo.Size;
+                    Console.WriteLine("Combo has really been set to medium.");
+                }
+            }
+
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
         }
@@ -97,7 +110,13 @@ namespace PointOfSale {
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.LightBlue;
             Size = DinoDiner.Menu.Size.Large;
-            _combo.Size = DinoDiner.Menu.Size.Medium;
+            _combo.Size = DinoDiner.Menu.Size.Large;
+
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo com) {
+                    com.Size = _combo.Size;
+                }
+            }
 
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
@@ -145,6 +164,7 @@ namespace PointOfSale {
         /// <param name="e">The RoutedEventArgs</param>
         private void DoneClick(object sender, RoutedEventArgs e) {
             NavigationService.Navigate(new MenuCategorySelection());
+            Console.WriteLine("When done, the combo size is " + _combo.Size);
         }
 
         /// <summary>
@@ -184,6 +204,21 @@ namespace PointOfSale {
             SetSide(combo.Side);
             SetDrink(combo.Drink);
             Size = combo.Size;
+
+            uxSmallBox.Background = Brushes.White;
+            uxMediumBox.Background = Brushes.White;
+            uxLargeBox.Background = Brushes.White;
+            switch (Size) {
+                case DinoDiner.Menu.Size.Small:
+                    uxSmallBox.Background = Brushes.LightBlue;
+                    break;
+                case DinoDiner.Menu.Size.Medium:
+                    uxMediumBox.Background = Brushes.LightBlue;
+                    break;
+                case DinoDiner.Menu.Size.Large:
+                    uxLargeBox.Background = Brushes.LightBlue;
+                    break;
+            }
         }
 
         /// <summary>

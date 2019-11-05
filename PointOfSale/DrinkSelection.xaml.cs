@@ -226,9 +226,9 @@ namespace PointOfSale {
             uxLemon.Background = Brushes.White;
             uxLemon.Content = "Add Lemon";
             LemonValue = false;
+            uxIce.Visibility = Visibility.Visible;
             uxIce.Background = Brushes.LightBlue;
             HasIce = true;
-            uxIce.Visibility = Visibility.Visible;
 
             if (editedDrink == null) {
                 AddItem(new Tyrannotea());
@@ -258,9 +258,10 @@ namespace PointOfSale {
             uxExtraData.Content = "Make Decaf";
             SpecialValue = false;
             uxLemon.Visibility = Visibility.Collapsed;
+            uxIce.Visibility = Visibility.Visible;
             uxIce.Background = Brushes.LightBlue;
             HasIce = false;
-            uxIce.Visibility = Visibility.Visible;
+            
 
             if (editedDrink == null) {
                 AddItem(new JurassicJava());
@@ -287,12 +288,13 @@ namespace PointOfSale {
 
             uxExtraData.Visibility = Visibility.Collapsed;
             uxLemon.Visibility = Visibility.Visible;
-            uxLargeBox.Background = Brushes.White;
+            uxLemon.Background = Brushes.White;
             uxLemon.Content = "Add Lemon";
             LemonValue = false;
+            uxIce.Visibility = Visibility.Visible;
             uxIce.Background = Brushes.LightBlue;
             HasIce = true;
-            uxIce.Visibility = Visibility.Visible;
+            
 
             if (editedDrink == null) {
                 AddItem(new Water());
@@ -528,7 +530,7 @@ namespace PointOfSale {
                     uxExtraData.Content = soda.Flavor;
                 }
                 uxLemon.Visibility = Visibility.Collapsed;
-                uxIce.Visibility = Visibility.Visible;
+                
 
             } else if (drink is Tyrannotea tea) {
                 uxTyrannotea.Background = Brushes.LightBlue;
@@ -573,14 +575,16 @@ namespace PointOfSale {
                 uxExtraData.Visibility = Visibility.Collapsed;
                 uxLemon.Visibility = Visibility.Visible;
                 if (water.Lemon) {
-                    uxLargeBox.Background = Brushes.LightBlue;
+                    uxLemon.Background = Brushes.LightBlue;
                     uxLemon.Content = "Remove Lemon";
                 } else {
-                    uxLargeBox.Background = Brushes.White;
+                    uxLemon.Background = Brushes.White;
                     uxLemon.Content = "Add Lemon";
                 }
                 LemonValue = water.Lemon;
             }
+
+            uxIce.Visibility = Visibility.Visible;
 
             if (drink.Ice) {
                 HasIce = true;
@@ -613,9 +617,9 @@ namespace PointOfSale {
                     if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink) {
                         LoadDrink(drink);
                     } else {
-                        uxIce.Visibility = Visibility.Collapsed;
-                        uxLemon.Visibility = Visibility.Collapsed;
-                        uxExtraData.Visibility = Visibility.Collapsed;
+                        //uxIce.Visibility = Visibility.Collapsed;
+                        //uxLemon.Visibility = Visibility.Collapsed;
+                        //uxExtraData.Visibility = Visibility.Collapsed;
                     }
                 }
             } else {
@@ -647,6 +651,7 @@ namespace PointOfSale {
                 drink.Size = Size;
                 order.Add(drink);
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+                LoadDrink(drink);
             }
         }
     }
