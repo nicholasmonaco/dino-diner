@@ -101,16 +101,20 @@ namespace PointOfSale {
                     val = false;
                 }
 
-                if (DataContext is Order order) {
-                    if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Entree entree) {
-                        entree.ChangeHold(index, val);
-                    }else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo) {
-                        combo.Entree.ChangeHold(index, val);
-                    }
+                
 
-                    if (editedEntree != null) {
-                        editedEntree.ChangeHold(index, val);
+                if(editedEntree == null) {
+                    if (DataContext is Order order) {
+                        if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Entree entree) {
+                            entree.ChangeHold(index, val);
+                        } else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo) {
+                            combo.Entree.ChangeHold(index, val);
+                        }
                     }
+                } else {
+                    editedEntree.ChangeHold(index, val);
+
+                    UpdateCurrentItem();
                 }
             }
         }
@@ -147,7 +151,10 @@ namespace PointOfSale {
                 if(editedEntree is DinoNuggets nuggets){
                     nuggets.AddNugget();
                     uxNuggetCounter.Text = nuggets.NuggetCount + " Nuggets";
+
+                    UpdateCurrentItem();
                 }
+                
             }
         }
 
@@ -168,6 +175,22 @@ namespace PointOfSale {
                 if (editedEntree is DinoNuggets nuggets) {
                     nuggets.RemoveNugget();
                     uxNuggetCounter.Text = nuggets.NuggetCount + " Nuggets";
+
+                    UpdateCurrentItem();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates the current item in the Order UI to reflect editedEntree.
+        /// </summary>
+        private void UpdateCurrentItem() {
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Entree entree) {
+                    order.Items[order.Items.IndexOf(entree)] = editedEntree;
+                } else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo) {
+                    combo.Entree = editedEntree;
+                    order.Items[order.Items.IndexOf(combo)] = combo;
                 }
             }
         }

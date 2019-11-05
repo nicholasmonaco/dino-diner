@@ -31,6 +31,7 @@
                  Grid.ColumnSpan="2"
                  ItemsSource="{Binding Path=Items}"
                  IsSynchronizedWithCurrentItem="True"
+                 SelectionChanged="SelectionChange"
                  x:Name="uxListBox">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -47,6 +48,7 @@
                         <TextBlock Text="{Binding Path=Description}"
                                    Grid.Column="0"
                                    Grid.Row="0"
+                                   
                                    />
                         <Button x:Name="DeleteButton" 
                                 Width="20" 

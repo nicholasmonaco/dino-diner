@@ -29,6 +29,11 @@ namespace PointOfSale {
         /// </summary>
         private CretaceousCombo _combo;
 
+        /// <summary>
+        /// The page to navigate to when the Done button is clicked.
+        /// </summary>
+        private Page _returnPage;
+
 
         /// <summary>
         /// Gets and sets the size of the combo.
@@ -47,6 +52,7 @@ namespace PointOfSale {
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
             Size = DinoDiner.Menu.Size.Small;
+            //_combo.Size = DinoDiner.Menu.Size.Small;
         }
 
         /// <summary>
@@ -59,6 +65,7 @@ namespace PointOfSale {
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.White;
             Size = DinoDiner.Menu.Size.Small;
+            _combo.Size = DinoDiner.Menu.Size.Small;
 
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
@@ -74,6 +81,7 @@ namespace PointOfSale {
             uxMediumBox.Background = Brushes.LightBlue;
             uxLargeBox.Background = Brushes.White;
             Size = DinoDiner.Menu.Size.Medium;
+            _combo.Size = DinoDiner.Menu.Size.Medium;
 
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
@@ -89,6 +97,7 @@ namespace PointOfSale {
             uxMediumBox.Background = Brushes.White;
             uxLargeBox.Background = Brushes.LightBlue;
             Size = DinoDiner.Menu.Size.Large;
+            _combo.Size = DinoDiner.Menu.Size.Medium;
 
             SetSide(_combo.Side);
             SetDrink(_combo.Drink);
@@ -174,6 +183,15 @@ namespace PointOfSale {
             _combo = combo;
             SetSide(combo.Side);
             SetDrink(combo.Drink);
+            Size = combo.Size;
+        }
+
+        /// <summary>
+        /// Sets the page to navigate to when the Done button is clicked.
+        /// </summary>
+        /// <param name="page">The page to navigate to.</param>
+        public void SetReturnPage(Page page) {
+            _returnPage = page;
         }
 
     }

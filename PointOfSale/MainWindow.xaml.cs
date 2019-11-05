@@ -75,5 +75,13 @@ namespace PointOfSale
         public void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args) {
             PassOnDataContext();
         }
+
+        /// <summary>
+        /// Gets and returns the current page displayed in the window.
+        /// </summary>
+        /// <returns>The current page displayed in the window.</returns>
+        public Page GetCurrentPage() {
+            return (Page)OrderUI.Content;
+        }
     }
 }

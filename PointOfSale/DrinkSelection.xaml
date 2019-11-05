@@ -65,13 +65,13 @@
                 </WrapPanel.Resources>
 
                 <Button x:Name="uxExtraData" Click="SpecialClick">
-                    <TextBlock Text="{Binding specialText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<TextBlock Text="{Binding specialText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
                 </Button>
                 <Button x:Name="uxLemon" Click="LemonClick">
-                    <TextBlock Text="{Binding lemonText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<TextBlock Text="{Binding lemonText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
                 </Button>
                 <Button x:Name="uxIce" Click="IceClick">
-                    <TextBlock Text="{Binding iceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<TextBlock Text="{Binding iceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
                 </Button>
             </WrapPanel>
 

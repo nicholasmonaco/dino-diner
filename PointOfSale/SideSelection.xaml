@@ -54,6 +54,10 @@
                 <Button x:Name="uxLargeBox" Click="LargeClicked">Large</Button>
             </WrapPanel>
 
+            <Button x:Name="uxDone" Click="DoneClick"
+                    Width="140" Height="80"
+                    Grid.Column="2">Done</Button>
+            
         </Grid>
 
     </Grid>

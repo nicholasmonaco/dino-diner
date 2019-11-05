@@ -151,6 +151,8 @@ namespace PointOfSale {
                 Fryceritops item = new Fryceritops();
                 item.Size = editedSide.Size;
                 editedSide = item;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -171,6 +173,8 @@ namespace PointOfSale {
                 MeteorMacAndCheese item = new MeteorMacAndCheese();
                 item.Size = editedSide.Size;
                 editedSide = item;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -191,6 +195,8 @@ namespace PointOfSale {
                 MezzorellaSticks item = new MezzorellaSticks();
                 item.Size = editedSide.Size;
                 editedSide = item;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -211,7 +217,21 @@ namespace PointOfSale {
                 Triceritots item = new Triceritots();
                 item.Size = editedSide.Size;
                 editedSide = item;
+
+                UpdateCurrentItem();
             }
+        }
+
+        /// <summary>
+        /// Handles what happens when the Done button is clicked.
+        /// </summary>
+        /// <param name="sender">The object being clicked.</param>
+        /// <param name="e">The RoutedEventArgs.</param>
+        private void DoneClick(object sender, RoutedEventArgs e) {
+            if (_returnPage is CustomizeCombo page) {
+                page.SetSide(editedSide);
+            }
+            NavigationService.Navigate(_returnPage);
         }
 
         /// <summary>
@@ -248,7 +268,7 @@ namespace PointOfSale {
             if(side.Size == DinoDiner.Menu.Size.Small) {
                 uxSmallBox.Background = Brushes.LightBlue;
             } else if (side.Size == DinoDiner.Menu.Size.Medium) {
-                uxSmallBox.Background = Brushes.LightBlue;
+                uxMediumBox.Background = Brushes.LightBlue;
             } else if (side.Size == DinoDiner.Menu.Size.Large) {
                 uxLargeBox.Background = Brushes.LightBlue;
             }
@@ -268,34 +288,63 @@ namespace PointOfSale {
             uxLargeBox.Background = Brushes.White;
 
 
-            if (DataContext is Order order) {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
-                    /*Size = side.Size;
-                    switch (Size) {
-                        case DinoDiner.Menu.Size.Small:
-                            uxSmallBox.Background = Brushes.LightBlue;
-                            break;
-                        case DinoDiner.Menu.Size.Medium:
-                            uxLargeBox.Background = Brushes.LightBlue;
-                            break;
-                        case DinoDiner.Menu.Size.Large:
-                            uxLargeBox.Background = Brushes.LightBlue;
-                            break;
-                    }*/
+            if(editedSide == null) {
+                if (DataContext is Order order) {
+                    if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                        /*Size = side.Size;
+                        switch (Size) {
+                            case DinoDiner.Menu.Size.Small:
+                                uxSmallBox.Background = Brushes.LightBlue;
+                                break;
+                            case DinoDiner.Menu.Size.Medium:
+                                uxLargeBox.Background = Brushes.LightBlue;
+                                break;
+                            case DinoDiner.Menu.Size.Large:
+                                uxLargeBox.Background = Brushes.LightBlue;
+                                break;
+                        }*/
 
-                    if(side is Fryceritops fry) {
-                        uxFryceritops.Background = Brushes.LightBlue;
-                    }else if(side is MeteorMacAndCheese mac) {
-                        uxMeteorMac.Background = Brushes.LightBlue;
-                    } else if(side is MezzorellaSticks sticks) {
-                        uxMezzorellaSticks.Background = Brushes.LightBlue;
-                    } else if(side is Triceritots tots) {
-                        uxTriceritots.Background = Brushes.LightBlue;
+                        if (side is Fryceritops fry) {
+                            uxFryceritops.Background = Brushes.LightBlue;
+                        } else if (side is MeteorMacAndCheese mac) {
+                            uxMeteorMac.Background = Brushes.LightBlue;
+                        } else if (side is MezzorellaSticks sticks) {
+                            uxMezzorellaSticks.Background = Brushes.LightBlue;
+                        } else if (side is Triceritots tots) {
+                            uxTriceritots.Background = Brushes.LightBlue;
+                        }
                     }
                 }
+            } else {
+                if (editedSide is Fryceritops fry) {
+                    uxFryceritops.Background = Brushes.LightBlue;
+                } else if (editedSide is MeteorMacAndCheese mac) {
+                    uxMeteorMac.Background = Brushes.LightBlue;
+                } else if (editedSide is MezzorellaSticks sticks) {
+                    uxMezzorellaSticks.Background = Brushes.LightBlue;
+                } else if (editedSide is Triceritots tots) {
+                    uxTriceritots.Background = Brushes.LightBlue;
+                }
+
+                //UpdateCurrentItem();
             }
         }
 
+
+        /// <summary>
+        /// Updates the current item in the Order UI to reflect editedSide.
+        /// </summary>
+        private void UpdateCurrentItem() {
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side) {
+                    order.Items[order.Items.IndexOf(side)] = editedSide;
+                } else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo) {
+                    editedSide.Size = combo.Size;
+                    combo.Side = editedSide;
+                    order.Items[order.Items.IndexOf(combo)] = combo;
+                }
+            }
+        }
 
         /// <summary>
         /// Adds the passed in side to the order.

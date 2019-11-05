@@ -122,6 +122,8 @@ namespace PointOfSale {
                 }
             } else {
                 editedDrink.Size = DinoDiner.Menu.Size.Small;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -144,6 +146,8 @@ namespace PointOfSale {
                 }
             } else {
                 editedDrink.Size = DinoDiner.Menu.Size.Medium;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -166,6 +170,8 @@ namespace PointOfSale {
                 }
             } else {
                 editedDrink.Size = DinoDiner.Menu.Size.Large;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -195,6 +201,8 @@ namespace PointOfSale {
                 Sodasaurus drink = new Sodasaurus();
                 drink.Size = drink.Size;
                 editedDrink = drink;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -228,6 +236,8 @@ namespace PointOfSale {
                 Tyrannotea drink = new Tyrannotea();
                 drink.Size = drink.Size;
                 editedDrink = drink;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -258,6 +268,8 @@ namespace PointOfSale {
                 JurassicJava drink = new JurassicJava();
                 drink.Size = drink.Size;
                 editedDrink = drink;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -288,6 +300,8 @@ namespace PointOfSale {
                 Water drink = new Water();
                 drink.Size = drink.Size;
                 editedDrink = drink;
+
+                UpdateCurrentItem();
             }
         }
 
@@ -323,6 +337,7 @@ namespace PointOfSale {
                     } else {
                         if(editedDrink is Tyrannotea tea) {
                             tea.Sweet = SpecialValue;
+                            UpdateCurrentItem();
                         }
                     }
                     break;
@@ -346,6 +361,7 @@ namespace PointOfSale {
                     } else {
                         if(editedDrink is JurassicJava java) {
                             java.Decaf = SpecialValue;
+                            UpdateCurrentItem();
                         }
                     }
                     break;
@@ -381,8 +397,10 @@ namespace PointOfSale {
             } else {
                 if (editedDrink is Tyrannotea tea) {
                     tea.Lemon = LemonValue;
+                    UpdateCurrentItem();
                 } else if (editedDrink is Water water) {
                     water.Lemon = LemonValue;
+                    UpdateCurrentItem();
                 }
             }
         }
@@ -411,6 +429,7 @@ namespace PointOfSale {
                 }
             } else {
                 editedDrink.Ice = HasIce;
+                UpdateCurrentItem();
             }
         }
 
@@ -448,6 +467,7 @@ namespace PointOfSale {
             } else {
                 if(editedDrink is Sodasaurus soda) {
                     soda.Flavor = newFlavor;
+                    UpdateCurrentItem();
                 }
             }
         }
@@ -587,17 +607,36 @@ namespace PointOfSale {
             uxLargeBox.Background = Brushes.White;
 
 
-            if (DataContext is Order order) {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink) {
-                    LoadDrink(drink);
-                } else {
-                    uxIce.Visibility = Visibility.Collapsed;
-                    uxLemon.Visibility = Visibility.Collapsed;
-                    uxExtraData.Visibility = Visibility.Collapsed;
+            
+            if(editedDrink == null) {
+                if (DataContext is Order order) {
+                    if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink) {
+                        LoadDrink(drink);
+                    } else {
+                        uxIce.Visibility = Visibility.Collapsed;
+                        uxLemon.Visibility = Visibility.Collapsed;
+                        uxExtraData.Visibility = Visibility.Collapsed;
+                    }
                 }
+            } else {
+                LoadDrink(editedDrink);
             }
         }
 
+        /// <summary>
+        /// Updates the current item in the Order UI to reflect editedDrink.
+        /// </summary>
+        private void UpdateCurrentItem() {
+            if (DataContext is Order order) {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink) {
+                    order.Items[order.Items.IndexOf(drink)] = editedDrink;
+                } else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo) {
+                    editedDrink.Size = combo.Size;
+                    combo.Drink = editedDrink;
+                    order.Items[order.Items.IndexOf(combo)] = combo;
+                }
+            }
+        }
 
         /// <summary>
         /// Adds the passed in drink to the order.

@@ -66,6 +66,7 @@ namespace PointOfSale {
 
             if (DataContext is Order order) {
                 order.Add(new CretaceousCombo(entree));
+                CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
 
                 CustomizeCombo page = new CustomizeCombo();
                 page.SetCombo((CretaceousCombo)order.Items.Last<IOrderItem>());
