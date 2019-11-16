@@ -12,6 +12,8 @@ body {
     padding-right: 15px;
 }
 
+/* The formatting for the 'menu-item' class, which is used on the 
+    Menu page to format each menu item. */
 .menu-item {
     color: darkblue;
 }
