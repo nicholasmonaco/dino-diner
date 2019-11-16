@@ -1,0 +1,71 @@
+﻿@page
+@model Website.Pages.MenuModel
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<h1>Menu</h1>
+
+<h2>Combos</h2>
+@foreach (var i in Model.menu.AvailableCombos) {
+    <div class="menu-item">
+        <h3>@i.Description</h3>
+        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+        <p>@i.Calories Calories</p>
+
+        <p>
+            Ingredients: <br />
+            @foreach (var ing in i.Ingredients) {
+            <p>&#9;• @ing</p>
+        }
+            </p> <br />
+        </div>
+    }
+
+<h2>Entrees</h2>
+@foreach (var i in Model.menu.AvailableEntrees) {
+    <div class="menu-item">
+        <h3>@i.Description</h3>
+        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+        <p>@i.Calories Calories</p>
+
+        <p>
+            Ingredients: <br />
+            @foreach (var ing in i.Ingredients) {
+            <p>&#9;• @ing</p>
+        }
+            </p> <br />
+        </div>
+    }
+
+<h2>Sides</h2>
+@foreach (var i in Model.menu.AvailableSides) {
+    <div class="menu-item">
+        <h3>@i.Description</h3>
+        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+        <p>@i.Calories Calories</p>
+
+        <p>
+            Ingredients: <br />
+            @foreach (var ing in i.Ingredients) {
+            <p>&#9;• @ing</p>
+        }
+            </p> <br />
+        </div>
+    }
+
+<h2>Drinks</h2>
+@foreach (var i in Model.menu.AvailableDrinks) {
+    <div class="menu-item">
+        <h3>@i.Description</h3>
+        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+        <p>@i.Calories Calories</p>
+
+        <p>
+            Ingredients: <br />
+            @foreach (var ing in i.Ingredients) {
+            <p>&#9;• @ing</p>
+        }
+            </p> <br />
+        </div>
+    }
