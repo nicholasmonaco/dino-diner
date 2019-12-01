@@ -4,68 +4,133 @@
     ViewData["Title"] = "Menu";
 }
 
-<h1>Menu</h1>
+@using DinoDiner.Menu;
 
-<h2>Combos</h2>
-@foreach (var i in Model.menu.AvailableCombos) {
-    <div class="menu-item">
-        <h3>@i.Description</h3>
-        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
-        <p>@i.Calories Calories</p>
 
-        <p>
-            Ingredients: <br />
-            @foreach (var ing in i.Ingredients) {
-            <p>&#9;• @ing</p>
-        }
-            </p> <br />
+<div class="form-container">
+    <div class="menu-list">
+        <h1>Menu</h1>
+
+        @if (Model.ItemsEmpty) { <h2>No results.</h2> }
+
+        @if (Model.Items[0].Count > 0) {<h2>Combos</h2>}
+        @foreach (CretaceousCombo i in Model.Items[0]) {
+            <div class="menu-item">
+                <h3>@i.Description</h3>
+                <h4>@i.Side.Description</h4>
+                <h4>@i.Drink.Description</h4>
+                
+                <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+                <p>@i.Calories Calories</p>
+
+                <p>
+                    Ingredients: <br />
+                    @foreach (var ing in i.Ingredients) {
+                    <p>&#9;• @ing</p>
+                }
+                    </p> <br />
+                </div>
+            }
+
+        @if (Model.Items[1].Count > 0) {<h2>Entrees</h2>}
+        @foreach (Entree i in Model.Items[1]) {
+            <div class="menu-item">
+                <h3>@i.Description</h3>
+                <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+                <p>@i.Calories Calories</p>
+
+                <p>
+                    Ingredients: <br />
+                    @foreach (var ing in i.Ingredients) {
+                    <p>&#9;• @ing</p>
+                }
+                    </p> <br />
+                </div>
+            }
+
+        @if (Model.Items[2].Count > 0) {<h2>Sides</h2>}
+        @foreach (Side i in Model.Items[2]) {
+            <div class="menu-item">
+                <h3>@i.Description</h3>
+                <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+                <p>@i.Calories Calories</p>
+
+                <p>
+                    Ingredients: <br />
+                    @foreach (var ing in i.Ingredients) {
+                    <p>&#9;• @ing</p>
+                }
+                    </p> <br />
+                </div>
+            }
+
+        @if (Model.Items[3].Count > 0) {<h2>Drinks</h2>}
+        @foreach (Drink i in Model.Items[3]) {
+            <div class="menu-item">
+                <h3>@i.Description</h3>
+                <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
+                <p>@i.Calories Calories</p>
+
+                <p>
+                    Ingredients: <br />
+                    @foreach (var ing in i.Ingredients) {
+                    <p>&#9;• @ing</p>
+                }
+                    </p> <br />
+                </div>
+            }
+    </div>
+
+    <form method="post">
+        <div class="search">
+            <input type="text" name="search" id="search" value="@Model.search" /><br />
+            <input type="submit" name="filter" id="filter" value="Search and Filter" /><br />
+            
+            <label>
+                <input type="checkbox" class="search-ingredients" name="SearchIngredients" value="true" checked="@Model.SearchIngredients"/>
+                Include Ingredients in Search<br />
+            </label>
         </div>
-    }
 
-<h2>Entrees</h2>
-@foreach (var i in Model.menu.AvailableEntrees) {
-    <div class="menu-item">
-        <h3>@i.Description</h3>
-        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
-        <p>@i.Calories Calories</p>
-
-        <p>
-            Ingredients: <br />
-            @foreach (var ing in i.Ingredients) {
-            <p>&#9;• @ing</p>
-        }
-            </p> <br />
+        <div class="category-filter">
+            Menu Category <br />
+            <label>
+                <input type="checkbox" class="menu-category" name="menuCategory" value="Combo" checked="@Model.menuCategory.Contains("Combo")" />
+                Combo<br />
+            </label>
+            <label>
+                <input type="checkbox" class="menu-category" name="menuCategory" value="Entree" checked="@Model.menuCategory.Contains("Entree")" />
+                Entree<br />
+            </label>
+            <label>
+                <input type="checkbox" class="menu-category" name="menuCategory" value="Side" checked="@Model.menuCategory.Contains("Side")" />
+                Side<br />
+            </label>
+            <label>
+                <input type="checkbox" class="menu-category" name="menuCategory" value="Drink" checked="@Model.menuCategory.Contains("Drink")" />
+                Drink<br />
+            </label>
         </div>
-    }
 
-<h2>Sides</h2>
-@foreach (var i in Model.menu.AvailableSides) {
-    <div class="menu-item">
-        <h3>@i.Description</h3>
-        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
-        <p>@i.Calories Calories</p>
-
-        <p>
-            Ingredients: <br />
-            @foreach (var ing in i.Ingredients) {
-            <p>&#9;• @ing</p>
-        }
-            </p> <br />
+        <div class="price-filter">
+            Price<br />
+            Min
+            <input type="number" id="minimum-price" name="minimumPrice" step="0.01" value="@Model.minimumPrice" />
+            Max
+            <input type="number" id="maximum-price" name="maximumPrice" step="0.01" value="@Model.maximumPrice" />
         </div>
-    }
 
-<h2>Drinks</h2>
-@foreach (var i in Model.menu.AvailableDrinks) {
-    <div class="menu-item">
-        <h3>@i.Description</h3>
-        <p>Price: $@String.Format("{0:0.00}", i.Price)</p>
-        <p>@i.Calories Calories</p>
-
-        <p>
-            Ingredients: <br />
-            @foreach (var ing in i.Ingredients) {
-            <p>&#9;• @ing</p>
-        }
-            </p> <br />
+        <div class="ingredient-filter">
+            Excluding Ingredients<br />
+            @foreach (var ing in Model.Menu.PossibleIngredients) {
+                <label>
+                    <input type="checkbox" name="blacklistedIngredients" value="@ing" checked="@Model.blacklistedIngredients.Contains(ing)" />
+                    @ing<br />
+                </label>
+            }
         </div>
-    }
+        
+    </form>
+</div>
+
+

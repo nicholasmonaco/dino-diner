@@ -2,6 +2,7 @@
 *   Author: Nick Monaco
 */
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace DinoDiner.Menu {
 
@@ -24,6 +25,11 @@ namespace DinoDiner.Menu {
         /// A list of special instructions for food preperation.
         /// </summary>
         string[] Special { get; }
+
+        /// <summary>
+        /// Gets the list of ingredients.
+        /// </summary>
+        List<string> Ingredients { get; }
 
 
         /// <summary>
